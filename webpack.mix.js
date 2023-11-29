@@ -39,7 +39,7 @@ mix.setPublicPath('dist')
         },
         plugins: [
             new CKEditorWebpackPlugin({
-                language: 'en',
+                language: 'pt-br',
                 addMainLanguageTranslationsToAllAssets: true
             })
         ],

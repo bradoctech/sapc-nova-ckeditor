@@ -1,6 +1,35 @@
 <template>
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 md:py-1">
+                <strong class="block">Variáveis</strong>
+                </div>
+                <div class="w-full md:w-1/2 md:py-1">
+                <strong class="block">Fórmulas</strong>
+                </div>                
+            </div>
+            <div class="flex flex-col md:flex-row mb-4">
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1 mr-4">
+                    <v-select v-model="variavelSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveis" @search="fetchVariaveis"></v-select>
+                </div>
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1">
+                    <button @click="addVariavel()" class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
+                        Adicionar Variável
+                    </button>
+                </div>
+
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1 mr-4">
+                    <v-select v-model="formulaSelecionada" :filterable="false" inputId="id" label="nome" :options="listaFormulas" @search="fetchFormulas"></v-select>
+                </div>
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1">
+                    <button @click="addFormula()" class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
+                        Adicionar Fórmula
+                    </button>
+                </div>
+            </div>
+            
+            
             <textarea ref="editor" class="hidden" :id="currentField.attribute" :class="errorClasses" :value="value" />
 
             <p v-if="currentField.helpText" v-html="currentField.helpText" class="help-text help-text mt-2" />
@@ -42,14 +71,21 @@ import HasUUID from "./mixins/hasUUID"
 import {DependentFormField, HandlesValidationErrors} from 'laravel-nova'
 import debounce from 'lodash/debounce'
 import RegexParser from 'regex-parser'
+import vSelect from 'vue-select'
+
+
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
     props: ['resourceName', 'resourceId', 'field', 'toolbar', 'formUniqueId'],
-    components: {SnippetBrowser, MediaBrowser},
+    components: {SnippetBrowser, MediaBrowser, vSelect},
     data() {
         return {
-            mounted: false
+            mounted: false,
+            listaVariaveis: [],
+            listaFormulas: [],
+            variavelSelecionada: null,
+            formulaSelecionada: null
         }
     },
     computed: {
@@ -71,6 +107,7 @@ export default {
         }
     },
     methods: {
+        
         createCkEditor() {
             const toolbarOptions = this.initToolbarOptions(this.currentField.toolbarOptions)
             const headings = toolbarOptions.headings
@@ -287,6 +324,70 @@ export default {
             if (innerEditor?.length) {
                 resizeObserver.observe(innerEditor[0])
             }
+        },
+
+        addVariavel() {
+            const editor = this.$options[this.editorName]
+            if (editor) {
+                editor.model.change( writer => {
+                    const insertPosition = editor.model.document.selection.getFirstPosition();
+                    console.log(this.variavelSelecionada);
+                    const viewFragment = editor.data.processor.toView( '${'+this.variavelSelecionada.nome+'}' );
+                    const modelFragment = editor.data.toModel( viewFragment );
+                    editor.model.insertContent(modelFragment, insertPosition );
+                } );
+            }
+        },
+
+        addFormula() {
+            const editor = this.$options[this.editorName]
+            if (editor) {
+                editor.model.change( writer => {
+                    const insertPosition = editor.model.document.selection.getFirstPosition();
+                    
+                    const viewFragment = editor.data.processor.toView( '==('+this.formulaSelecionada.formula+')' );
+                    const modelFragment = editor.data.toModel( viewFragment );
+                    editor.model.insertContent(modelFragment, insertPosition );
+                } );
+            }
+        },
+
+        /**
+         * Triggered when the search text changes.
+         *
+         * @param search  {String}    Current search text
+         * @param loading {Function}	Toggle loading class
+         */
+        async fetchVariaveis (search, loading) {
+            loading(true);
+            
+            if (search != '') {
+                this.variavelSelecionada = null;
+                await Nova.request()
+                .get(`/nova-vendor/nova-ckeditor/variaveis/${escape(search)}`)
+                .then(res => { 
+                    this.listaVariaveis = res.data;
+                })
+                .catch();
+            }
+                
+            loading(false);
+        },
+
+        async fetchFormulas (search, loading) {
+            loading(true);
+            
+            if (search != '') {
+                this.formulaSelecionada = null;
+                await Nova.request()
+                .get(`/nova-vendor/nova-ckeditor/formulas/${escape(search)}`)
+                .then(res => { 
+                    this.listaFormulas = res.data;
+                })
+                .catch();
+            }
+                
+            loading(false);
         }
     },
     created() {
