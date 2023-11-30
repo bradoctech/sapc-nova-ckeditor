@@ -11,7 +11,7 @@ By utilizing the `limitOnIndex` method, you can define a maximum character limit
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

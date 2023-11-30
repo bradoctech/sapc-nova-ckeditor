@@ -5,7 +5,7 @@ namespace App\Nova\Resources;
 use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Mostafaznv\NovaCkEditor\VideoUpload;
+use Bradoctech\SapcNovaCkEditor\VideoUpload;
 use App\Models\Video as VideoModel;
 use Mostafaznv\NovaVideo\VideoMeta;
 

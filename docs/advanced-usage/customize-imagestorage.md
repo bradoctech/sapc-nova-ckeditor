@@ -4,7 +4,7 @@ You have the option to override the `ImageStorage` service by binding your own e
 
 ```php
 use Illuminate\Http\Request;
-use Mostafaznv\NovaCkEditor\ImageStorage;
+use Bradoctech\SapcNovaCkEditor\ImageStorage;
 
 class MyImageStorage extends ImageStorage
 {

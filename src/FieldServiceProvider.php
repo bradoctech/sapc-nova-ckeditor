@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor;
+namespace Bradoctech\SapcNovaCkEditor;
 
 use Composer\InstalledVersions;
 use Illuminate\Support\Facades\Route;

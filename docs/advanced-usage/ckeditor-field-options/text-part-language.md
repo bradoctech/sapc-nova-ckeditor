@@ -13,7 +13,7 @@ By utilizing the `textPartLanguage` method, you can specify the language for sel
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

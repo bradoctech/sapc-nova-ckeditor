@@ -23,13 +23,13 @@ Part of the functionality provided by the NovaCkeditor package relies on <mark s
 #### 1. Install the package using composer
 
 ```bash
-composer require mostafaznv/nova-ckeditor
+composer require bradoctech/sapc-nova-ckeditor
 ```
 
 #### 2. Publish the configuration, migrations, models, resources, and snippets
 
 ```bash
-php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvider"
+php artisan vendor:publish --provider="Bradoctech\SapcNovaCkEditor\FieldServiceProvider"
 ```
 
 #### 3. Prepare the migration, configurations and models

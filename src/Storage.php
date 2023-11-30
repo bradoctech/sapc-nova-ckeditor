@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor;
+namespace Bradoctech\SapcNovaCkEditor;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

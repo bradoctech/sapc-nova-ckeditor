@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor\Http\Controllers\Api;
+namespace Bradoctech\SapcNovaCkEditor\Http\Controllers\Api;
 
 use App\Models\Sapc\Formula;
 use App\Models\Sapc\Variavel;

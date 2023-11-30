@@ -13,7 +13,7 @@ By utilizing the `snippets` method, you can define an array of snippet items to 
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

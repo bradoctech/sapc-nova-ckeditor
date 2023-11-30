@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor;
+namespace Bradoctech\SapcNovaCkEditor;
 
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Http\Requests\NovaRequest;

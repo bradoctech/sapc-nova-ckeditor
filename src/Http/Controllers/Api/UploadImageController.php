@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor\Http\Controllers\Api;
+namespace Bradoctech\SapcNovaCkEditor\Http\Controllers\Api;
 
 
 use App\Nova\Resources\Image;
@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mostafaznv\Larupload\Traits\Larupload;
-use Mostafaznv\NovaCkEditor\ImageUpload;
+use Bradoctech\SapcNovaCkEditor\ImageUpload;
 
 
 class UploadImageController extends ApiController

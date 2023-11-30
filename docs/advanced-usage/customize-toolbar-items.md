@@ -7,7 +7,7 @@ While the configuration file provides a generic way to customize toolbar items f
 By leveraging these two approaches, you have the flexibility to customize toolbar items globally or on a per-field basis, depending on the level of customization required in your application.
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

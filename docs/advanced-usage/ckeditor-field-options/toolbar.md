@@ -17,7 +17,7 @@ Additionally, the second argument, `items`, is an optional array that empowers y
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

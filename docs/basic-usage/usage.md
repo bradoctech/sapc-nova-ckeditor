@@ -10,7 +10,7 @@ Add the <mark style="color:red;">CkEditor</mark> field to your resource by using
 namespace App\Nova\Resources;
 
 use App\Models\Article as ArticleModel;
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

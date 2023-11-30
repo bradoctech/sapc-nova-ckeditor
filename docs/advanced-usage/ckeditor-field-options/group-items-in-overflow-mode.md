@@ -15,7 +15,7 @@ To use this method, pass a boolean value as the `status` argument. Setting `stat
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

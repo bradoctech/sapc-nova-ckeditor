@@ -17,7 +17,7 @@ To utilize the `videoBrowser` method, simply pass `true` or `false` as the `stat
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

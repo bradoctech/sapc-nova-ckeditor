@@ -24,7 +24,7 @@ return [
 2. Use it in your CkEditor field:
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

@@ -13,7 +13,7 @@ By utilizing the `contentLanguage` method, you can specify the language for the 
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

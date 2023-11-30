@@ -4,7 +4,7 @@ You have the option to override the `AudioStorage` service by binding your own e
 
 ```php
 use Illuminate\Http\Request;
-use Mostafaznv\NovaCkEditor\AudioStorage;
+use Bradoctech\SapcNovaCkEditor\AudioStorage;
 
 class MyAudioStorage extends AudioStorage
 {

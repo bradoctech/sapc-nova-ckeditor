@@ -5,7 +5,7 @@ namespace App\Nova\Resources;
 use App\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Mostafaznv\NovaCkEditor\ImageUpload;
+use Bradoctech\SapcNovaCkEditor\ImageUpload;
 use App\Models\Image as ImageModel;
 
 class Image extends Resource

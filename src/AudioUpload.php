@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor;
+namespace Bradoctech\SapcNovaCkEditor;
 
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Audio;

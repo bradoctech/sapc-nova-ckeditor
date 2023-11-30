@@ -13,7 +13,7 @@ This method allows you to specify the desired height of the editor, providing co
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

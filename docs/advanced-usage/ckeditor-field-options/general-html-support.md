@@ -11,7 +11,7 @@ This method allows you to enable <mark style="color:red;">General HTML Support</
 
 
 ```php
-use Mostafaznv\NovaCkEditor\CkEditor;
+use Bradoctech\SapcNovaCkEditor\CkEditor;
 
 class Article extends Resource
 {

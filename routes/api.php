@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Mostafaznv\NovaCkEditor\Http\Controllers\Api\UploadImageController;
-use Mostafaznv\NovaCkEditor\Http\Controllers\Api\ApiController;
+use Bradoctech\SapcNovaCkEditor\Http\Controllers\Api\UploadImageController;
+use Bradoctech\SapcNovaCkEditor\Http\Controllers\Api\ApiController;
 
 
 Route::as('nova-ckeditor.')->middleware('nova')->group(function () {

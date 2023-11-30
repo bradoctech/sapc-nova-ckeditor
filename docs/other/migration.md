@@ -9,7 +9,7 @@ To activate this functionality, you need to republish the migrations, models and
 Execute the following command:
 
 ```sh
-php artisan vendor:publish --provider="Mostafaznv\NovaCkEditor\FieldServiceProvider"
+php artisan vendor:publish --provider="Bradoctech\SapcNovaCkEditor\FieldServiceProvider"
 ```
 
 This command will generate two classes for Audio in `Models` and `App\Nova\Resources` directories, along with a migration file for the audio table.
@@ -18,7 +18,7 @@ This command will generate two classes for Audio in `Models` and `App\Nova\Resou
 
 After running the `php artisan migrate` command to create the audio table, follow these additional steps:
 
-1. Add the following properties to `config/nova-ckeditor.php` file (Check [the latest](https://github.com/mostafaznv/nova-ckeditor/blob/master/config/nova-ckeditor.php) version of the config for reference):
+1. Add the following properties to `config/nova-ckeditor.php` file (Check [the latest](https://github.com/bradoctech/sapc-nova-ckeditor/blob/master/config/nova-ckeditor.php) version of the config for reference):
    * audio-naming-method
    * toolbars.toolbar-1.browser.audio
    * toolbars.toolbar-1.items.audioBrowser
@@ -57,7 +57,7 @@ There were some backward incompatible changes made to the configuration file. Pl
 
 ### **From 3.1.1 to 3.2.0**
 
-* Please add `removeFormat` to `toolbar.items` in config file ([config/nova-ckeditor.php](https://github.com/mostafaznv/nova-ckeditor/blob/master/config/nova-ckeditor.php)).
+* Please add `removeFormat` to `toolbar.items` in config file ([config/nova-ckeditor.php](https://github.com/bradoctech/sapc-nova-ckeditor/blob/master/config/nova-ckeditor.php)).
 
 
 

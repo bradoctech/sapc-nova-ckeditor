@@ -1,6 +1,6 @@
 <?php
 
-namespace Mostafaznv\NovaCkEditor;
+namespace Bradoctech\SapcNovaCkEditor;
 
 use Laravel\Nova\Fields\Expandable;
 use Laravel\Nova\Fields\Field;
