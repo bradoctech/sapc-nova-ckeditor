@@ -1,6 +1,6 @@
 <template>
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
-        <template #field>
+        <template >
             <div class="flex flex-col md:flex-row">
                 
                 <div class="w-full md:w-1/2 md:py-1">

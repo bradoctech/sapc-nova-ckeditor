@@ -4,6 +4,7 @@ namespace Bradoctech\SapcNovaCkEditor\Http\Controllers\Api;
 
 use App\Models\Sapc\Formula;
 use App\Models\Sapc\Variavel;
+use App\Models\Sapc\VariavelContaGoverno;
 
 use Illuminate\Routing\Controller;
 
