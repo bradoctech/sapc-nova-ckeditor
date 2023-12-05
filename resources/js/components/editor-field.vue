@@ -402,7 +402,7 @@ export default {
             loading(false);
         },
 
-        async fetchVariaveis (search, loading) {
+        async fetchVariaveisContaGoverno (search, loading) {
             loading(true);
             
             if (search != '') {
