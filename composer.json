@@ -1,6 +1,6 @@
 {
     "name": "bradoctech/sapc-nova-ckeditor",
-    "description": "CkEditor for Laravel Nova",
+    "description": "CkEditor for Laravel Nova - Módulo SAPC",
     "keywords": [
         "laravel",
         "ckeditor",

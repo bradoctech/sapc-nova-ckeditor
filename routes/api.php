@@ -12,4 +12,5 @@ Route::as('nova-ckeditor.')->middleware('nova')->group(function () {
 
     Route::get('variaveis/{term}', [ApiController::class, 'searchVariaveis'])->name('variaveis.search');
     Route::get('formulas/{term}', [ApiController::class, 'searchFormulas'])->name('formulas.search');
+    Route::get('variaveisContaGoverno/{term}', [ApiController::class, 'searchVariaveisContaGoverno'])->name('variaveis-conta-governo.search');
 });

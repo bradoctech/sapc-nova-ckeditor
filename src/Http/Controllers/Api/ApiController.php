@@ -21,4 +21,10 @@ class ApiController extends Controller
         $listaFormula = Formula::where('nome', 'LIKE', "%{$term}%")->get();
         return response()->json($listaFormula);
     }
+
+    public function searchVariaveisContaGoverno($term)
+    {
+        $listaVariavel = VariavelContaGoverno::where('nome', 'LIKE', "%{$term}%")->get();
+        return response()->json($listaVariavel);
+    }
 }

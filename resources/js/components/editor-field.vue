@@ -2,6 +2,10 @@
     <default-field :field="currentField" :errors="errors" :full-width-content="true">
         <template #field>
             <div class="flex flex-col md:flex-row">
+                
+                <div class="w-full md:w-1/2 md:py-1">
+                <strong class="block">Variável de Conta de Governo</strong>
+                </div>
                 <div class="w-full md:w-1/2 md:py-1">
                 <strong class="block">Variáveis</strong>
                 </div>
@@ -10,6 +14,15 @@
                 </div>                
             </div>
             <div class="flex flex-col md:flex-row mb-4">
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1 mr-4">
+                    <v-select v-model="variavelContaGovernoSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveisContaGoverno" @search="fetchVariaveisContaGoverno"></v-select>
+                </div>
+                <div class="md:mt-0 w-full md:w-1/4 md:py-1">
+                    <button @click="addVariavelContaGoverno()" class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
+                        Adicionar Variável de Conta de Governo
+                    </button>
+                </div>
+
                 <div class="md:mt-0 w-full md:w-1/4 md:py-1 mr-4">
                     <v-select v-model="variavelSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveis" @search="fetchVariaveis"></v-select>
                 </div>
@@ -83,8 +96,10 @@ export default {
         return {
             mounted: false,
             listaVariaveis: [],
+            listaVariaveisContaGoverno: [],
             listaFormulas: [],
             variavelSelecionada: null,
+            variavelContaGovernoSelecionada: null,
             formulaSelecionada: null
         }
     },
@@ -331,8 +346,21 @@ export default {
             if (editor) {
                 editor.model.change( writer => {
                     const insertPosition = editor.model.document.selection.getFirstPosition();
-                    console.log(this.variavelSelecionada);
+
                     const viewFragment = editor.data.processor.toView( '${'+this.variavelSelecionada.nome+'}' );
+                    const modelFragment = editor.data.toModel( viewFragment );
+                    editor.model.insertContent(modelFragment, insertPosition );
+                } );
+            }
+        },
+
+        addVariavelContaGoverno() {
+            const editor = this.$options[this.editorName]
+            if (editor) {
+                editor.model.change( writer => {
+                    const insertPosition = editor.model.document.selection.getFirstPosition();
+
+                    const viewFragment = editor.data.processor.toView( '${'+this.variavelContaGovernoSelecionada.nome+'}' );
                     const modelFragment = editor.data.toModel( viewFragment );
                     editor.model.insertContent(modelFragment, insertPosition );
                 } );
@@ -373,6 +401,23 @@ export default {
                 
             loading(false);
         },
+
+        async fetchVariaveis (search, loading) {
+            loading(true);
+            
+            if (search != '') {
+                this.variavelContaGovernoSelecionada = null;
+                await Nova.request()
+                .get(`/nova-vendor/nova-ckeditor/variaveisContaGoverno/${escape(search)}`)
+                .then(res => { 
+                    this.listaVariaveisContaGoverno = res.data;
+                })
+                .catch();
+            }
+                
+            loading(false);
+        },
+
 
         async fetchFormulas (search, loading) {
             loading(true);
