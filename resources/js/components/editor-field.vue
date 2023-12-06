@@ -480,6 +480,29 @@
   </script>
   
   <style lang="sass">
+  
+  .vs__dropdown-menu 
+      display: block
+      box-sizing: border-box
+      position: absolute
+      top: calc(100% - 1px)
+      left: 0
+      z-index: 1000
+      padding: 5px 0
+      margin: 0
+      max-width: 550px
+      width: 550px
+      min-width: 160px
+      overflow-y: auto
+      box-shadow: 0 3px 6px 0 rgba(0,0,0,.15)
+      border: 1px solid rgba(60,60,60,.26)
+      border-top-style: none
+      border-radius: 0 0 4px 4px
+      text-align: left
+      list-style: none
+      background: #fff
+  
+  
   .ck.ck-reset_all, .ck.ck-reset_all *
       // direction: ltr !important
   
