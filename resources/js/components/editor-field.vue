@@ -27,10 +27,10 @@
                   </div>
   
                   <div class="md:mt-0 w-full md:w-1/4 md:py-1 mr-4">
-                      <v-select v-model="variavelSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveis" @search="fetchVariaveis"></v-select>
+                      <v-select v-model="variavelContaGestaoSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveisContaGestao" @search="fetchVariaveisContaGestao"></v-select>
                   </div>
                   <div class="md:mt-0 w-full md:w-1/4 md:py-1">
-                      <button @click="addVariavel()" class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
+                      <button @click="addVariavelContaGestao()" class="shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
                           Adicionar Conta de Gestão
                       </button>
                   </div>
@@ -101,10 +101,10 @@
       data() {
           return {
               mounted: false,
-              listaVariaveis: [],
+              listaVariaveisContaGestao: [],
               listaVariaveisContaGoverno: [],
               listaFormulas: [],
-              variavelSelecionada: null,
+              variavelContaGestaoSelecionada: null,
               variavelContaGovernoSelecionada: null,
               formulaSelecionada: null,
   
@@ -367,13 +367,13 @@
               }
           },
   
-          addVariavel() {
+          addVariavelContaGestao() {
               const editor = this.$options[this.editorName]
               if (editor) {
                   editor.model.change( writer => {
                       const insertPosition = editor.model.document.selection.getFirstPosition();
   
-                      const viewFragment = editor.data.processor.toView( '${'+this.variavelSelecionada.nome+'}' );
+                      const viewFragment = editor.data.processor.toView( '$_ge{'+this.variavelContaGestaoSelecionada.nome+'}' );
                       const modelFragment = editor.data.toModel( viewFragment );
                       editor.model.insertContent(modelFragment, insertPosition );
                   } );
@@ -386,7 +386,7 @@
                   editor.model.change( writer => {
                       const insertPosition = editor.model.document.selection.getFirstPosition();
   
-                      const viewFragment = editor.data.processor.toView( '${'+this.variavelContaGovernoSelecionada.nome+'}' );
+                      const viewFragment = editor.data.processor.toView( '$_go{'+this.variavelContaGovernoSelecionada.nome+'}' );
                       const modelFragment = editor.data.toModel( viewFragment );
                       editor.model.insertContent(modelFragment, insertPosition );
                   } );
@@ -399,7 +399,7 @@
                   editor.model.change( writer => {
                       const insertPosition = editor.model.document.selection.getFirstPosition();
                       
-                      const viewFragment = editor.data.processor.toView( '==('+this.formulaSelecionada.formula+')' );
+                      const viewFragment = editor.data.processor.toView( '==#('+this.formulaSelecionada.formula+')' );
                       const modelFragment = editor.data.toModel( viewFragment );
                       editor.model.insertContent(modelFragment, insertPosition );
                   } );
@@ -412,15 +412,15 @@
            * @param search  {String}    Current search text
            * @param loading {Function}	Toggle loading class
            */
-          async fetchVariaveis (search, loading) {
+          async fetchVariaveisContaGestao (search, loading) {
               loading(true);
               
               if (search != '') {
-                  this.variavelSelecionada = null;
+                  this.variavelContaGestaoSelecionada = null;
                   await Nova.request()
                   .get(`/nova-vendor/nova-ckeditor/variaveis/${escape(search)}`)
                   .then(res => { 
-                      this.listaVariaveis = res.data;
+                      this.listaVariaveisContaGestao = res.data;
                   })
                   .catch();
               }
