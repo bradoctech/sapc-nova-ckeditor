@@ -401,7 +401,7 @@ export default {
         editor.model.change( writer => {
           const insertPosition = editor.model.document.selection.getFirstPosition();
 
-          const viewFragment = editor.data.processor.toView( '==#('+this.formulaSelecionada.formula+')' );
+          const viewFragment = editor.data.processor.toView( '==#('+this.formulaSelecionada.formula+')#' );
           const modelFragment = editor.data.toModel( viewFragment );
           editor.model.insertContent(modelFragment, insertPosition );
         } );
