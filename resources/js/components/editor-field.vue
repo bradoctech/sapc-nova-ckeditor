@@ -4,7 +4,7 @@
     <div
         class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full"
     >
-      <div class="flex mb-3">
+      <div v-if="field.showSelects" class="flex mb-3">
         <div class="w-1/4 px-1">
           <strong class="block">Variável de Conta de Governo</strong>
           <v-select v-model="variavelContaGovernoSelecionada" :filterable="false" inputId="id" label="nome" :options="listaVariaveisContaGoverno" @search="fetchVariaveisContaGoverno"></v-select>

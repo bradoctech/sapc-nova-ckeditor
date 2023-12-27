@@ -134,6 +134,7 @@ class CkEditor extends Field
      */
     public string $imageModel = '';
 
+    public bool $showSelects = true;
 
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
@@ -147,6 +148,12 @@ class CkEditor extends Field
         $this->imageModel = config('nova-ckeditor.image-model', 'App\Models\Image');
     }
 
+    public function hideSelects()
+    {
+        $this->showSelects = false;
+
+        return $this;
+    }
 
     /**
      * Set the toolbar name and items
