@@ -325,6 +325,7 @@ class CkEditor extends Field
             'videoHasLaruploadTrait' => $this->videoHasLaruploadTrait(),
             'imageHasLaruploadTrait' => $this->imageHasLaruploadTrait(),
             'novaVideoIsLegacy'      => $this->isLegacyNovaVideo(),
+            'showSelects'            => $this->showSelects,
         ]);
     }
 
