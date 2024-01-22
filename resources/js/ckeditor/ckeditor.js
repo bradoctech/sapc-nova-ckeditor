@@ -11,6 +11,7 @@ import Table from '@ckeditor/ckeditor5-table/src/table'
 // Block Elements
 import AutoFormat from '@ckeditor/ckeditor5-autoformat/src/autoformat'
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials'
+import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock'
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
@@ -102,6 +103,7 @@ export default class CkEditor extends ClassicEditorBase {
             Video,
             Audio,
             Essentials,
+            FindAndReplace,
             Font,
             Link,
             List,
