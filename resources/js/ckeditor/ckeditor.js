@@ -79,6 +79,7 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin'
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical'
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext'
+import Style from '@ckeditor/ckeditor5-style/src/style'
 import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
 
 // Extend the Base Class
@@ -154,6 +155,7 @@ export default class CkEditor extends ClassicEditorBase {
             SpecialCharactersLatin,
             SpecialCharactersMathematical,
             SpecialCharactersText,
+            Style,
             Indent,
             IndentBlock,
             ElementAddAttributes,
