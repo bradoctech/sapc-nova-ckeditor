@@ -72,6 +72,13 @@ import Audio from "./plugins/audio/audio"
 // Other
 import {Clipboard} from '@ckeditor/ckeditor5-clipboard'
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters'
+import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows'
+import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency'
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials'
+import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin'
+import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical'
+import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext'
 import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
 
 // Extend the Base Class
@@ -140,6 +147,13 @@ export default class CkEditor extends ClassicEditorBase {
             TableToolbar,
             HtmlEmbed,
             SourceEditing,
+            SpecialCharacters,
+            SpecialCharactersArrows,
+            SpecialCharactersCurrency,
+            SpecialCharactersEssentials,
+            SpecialCharactersLatin,
+            SpecialCharactersMathematical,
+            SpecialCharactersText,
             Indent,
             IndentBlock,
             ElementAddAttributes,

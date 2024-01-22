@@ -35,6 +35,7 @@
         "@ckeditor/ckeditor5-remove-format": "^40.1.0",
         "@ckeditor/ckeditor5-show-blocks": "^40.1.0",
         "@ckeditor/ckeditor5-source-editing": "^40.1.0",
+        "@ckeditor/ckeditor5-special-characters": "^40.1.0",
         "@ckeditor/ckeditor5-table": "^40.1.0",
         "@ckeditor/ckeditor5-theme-lark": "^40.1.0",
         "@ckeditor/ckeditor5-ui": "^40.1.0",
