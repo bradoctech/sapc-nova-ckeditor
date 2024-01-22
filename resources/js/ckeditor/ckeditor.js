@@ -16,6 +16,7 @@ import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock'
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
 import Heading from '@ckeditor/ckeditor5-heading/src/heading'
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight'
 import List from '@ckeditor/ckeditor5-list/src/list'
 import TextPartLanguage from '@ckeditor/ckeditor5-language/src/textpartlanguage'
 import {ShowBlocks} from '@ckeditor/ckeditor5-show-blocks'
@@ -108,6 +109,7 @@ export default class CkEditor extends ClassicEditorBase {
             Link,
             List,
             Heading,
+            Highlight,
             TextPartLanguage,
             Paragraph,
             ShowBlocks,
