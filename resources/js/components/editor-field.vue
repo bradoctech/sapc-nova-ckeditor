@@ -518,11 +518,13 @@ export default {
   background: #fff
 
 
-.ck.ck-reset_all, .ck.ck-reset_all *
+// .ck.ck-reset_all, .ck.ck-reset_all *
 // direction: ltr !important
 
 .ck-content.ck-editor__editable
   resize: vertical
+  min-height: 300px
+  height: auto !important
 
 .ck.ck-reset.ck-editor
   .ck.ck-toolbar
@@ -537,4 +539,3 @@ export default {
   .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused
     box-shadow: none
 </style>
-  
