@@ -7,14 +7,20 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline'
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar'
 import Table from '@ckeditor/ckeditor5-table/src/table'
+import TableCaption from '@ckeditor/ckeditor5-table/src/tablecaption'
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties'
+import TableColumnResize from '@ckeditor/ckeditor5-table/src/tablecolumnresize'
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties'
 
 // Block Elements
 import AutoFormat from '@ckeditor/ckeditor5-autoformat/src/autoformat'
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials'
+import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock'
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
 import Heading from '@ckeditor/ckeditor5-heading/src/heading'
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight'
 import List from '@ckeditor/ckeditor5-list/src/list'
 import TextPartLanguage from '@ckeditor/ckeditor5-language/src/textpartlanguage'
 import {ShowBlocks} from '@ckeditor/ckeditor5-show-blocks'
@@ -70,6 +76,14 @@ import Audio from "./plugins/audio/audio"
 // Other
 import {Clipboard} from '@ckeditor/ckeditor5-clipboard'
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
+import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters'
+import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows'
+import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency'
+import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials'
+import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin'
+import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical'
+import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext'
+import Style from '@ckeditor/ckeditor5-style/src/style'
 import ElementAddAttributes from './plugins/element-attribute/src/add-attribute-to-element'
 
 // Extend the Base Class
@@ -102,10 +116,12 @@ export default class CkEditor extends ClassicEditorBase {
             Video,
             Audio,
             Essentials,
+            FindAndReplace,
             Font,
             Link,
             List,
             Heading,
+            Highlight,
             TextPartLanguage,
             Paragraph,
             ShowBlocks,
@@ -134,8 +150,20 @@ export default class CkEditor extends ClassicEditorBase {
             MediaEmbed,
             Table,
             TableToolbar,
+            TableCaption,
+            TableCellProperties,
+            TableColumnResize,
+            TableProperties,
             HtmlEmbed,
             SourceEditing,
+            SpecialCharacters,
+            SpecialCharactersArrows,
+            SpecialCharactersCurrency,
+            SpecialCharactersEssentials,
+            SpecialCharactersLatin,
+            SpecialCharactersMathematical,
+            SpecialCharactersText,
+            Style,
             Indent,
             IndentBlock,
             ElementAddAttributes,
