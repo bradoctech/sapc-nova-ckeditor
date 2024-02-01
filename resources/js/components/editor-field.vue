@@ -27,7 +27,7 @@
           </button>
         </div>
         <div class="w-1/4 px-1">
-          <strong class="block">Análises</strong>
+          <strong class="block">Gerais</strong>
           <v-select v-model="analiseSelecionada" :filterable="false" inputId="id" label="nome" :options="listaAnalises"></v-select>
           <button @click="addAnalise()" class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900" type="button">
             Adicionar Análise
@@ -104,6 +104,9 @@ export default {
         'Diretoria',
         'Ofício',
         'Data de ofício',
+        'Gestor',
+        'Controlador',
+        'Responsáveis Técnicos'
       ],
       variavelContaGestaoSelecionada: null,
       variavelContaGovernoSelecionada: null,
