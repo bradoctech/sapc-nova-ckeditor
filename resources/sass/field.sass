@@ -1,19 +1,37 @@
 /**
  * Nova Field Rounded Styles
  */
+
+.ck.ck-editor__main
+    position: relative
+    display: flex
+    flex-direction: column
+    padding: 20px
+    background: hsl(0, 0%, 98%)
+    border-radius: 10px
+
 .ck.ck-reset.ck-editor
     .ck.ck-toolbar
-        border-radius: 10px 10px 0 0
+        border-radius: 10px
+        border: 1px solid var(--ck-color-toolbar-border)
 
     .ck-editor__editable_inline
         @import "./figures.sass"
         @import "./blocks.sass"
-        border-radius: 0 0 10px 10px
-        padding: 0 10px
-        margin: 0
+        height: auto !important
 
-.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused
-    box-shadow: none !important
+        width: 21cm
+        min-height: 29.7cm
+
+        padding: 3cm 2cm 2cm 3cm
+
+        border: 1px hsl(0, 0%, 82.7%) solid
+        border-radius: 2px
+        background: white
+
+        box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.1)
+
+        margin: 0 auto
 
 .ck-responsive-form
     .ck-labeled-input
@@ -59,3 +77,4 @@
         border: 1px solid #fb90b4
         border-left: 10px solid #fb90b4
         border-radius: 5px
+
