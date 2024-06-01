@@ -3,6 +3,19 @@
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
             <div v-if="field.showSelects" class="flex mb-3">
                 <div class="w-1/4 px-1">
+                    <strong class="block">Exercício</strong>
+                    <v-select
+                        v-model="exercicioContaGovernoSelecionada"
+                        :filterable="false"
+                        inputId="exercicio"
+                        label="exercicio"
+                        :options="listaExercicio"
+                    ></v-select>
+                </div>
+            </div>
+            <div v-if="field.showSelects" class="flex mb-3">
+                <div class="w-1/4 px-1">
+                   
                     <strong class="block">Variável de Conta de Governo</strong>
                     <v-select
                         v-model="variavelContaGovernoSelecionada"
@@ -140,6 +153,7 @@ export default {
             mounted: false,
             listaVariaveisContaGestao: [],
             listaVariaveisContaGoverno: [],
+            listaExercicio: [],
             listaFormulas: [],
             listaAnalises: [
                 "Modelo Análise",
@@ -157,6 +171,7 @@ export default {
             ],
             variavelContaGestaoSelecionada: null,
             variavelContaGovernoSelecionada: null,
+            exercicioContaGovernoSelecionada: "Atual",
             formulaSelecionada: null,
             analiseSelecionada: null,
 
@@ -481,7 +496,8 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        "$_go{" +
+                        "$_go_"+
+                            this.exercicioContaGovernoSelecionada +"_{" +
                             this.variavelContaGovernoSelecionada.nome +
                             "}"
                     );
@@ -596,6 +612,18 @@ export default {
         }
 
         this.mounted = true;
+
+        const currentYear = new Date().getFullYear();
+        const baseYear = 2021;
+
+        for (let year = currentYear; year >= baseYear; year--) {
+            let label = year === currentYear ? 'Atual' : `Atual-${currentYear - year}`;
+            this.listaExercicio.push(label);
+        }
+
+        if (this.listaExercicio.includes('Atual')) {
+        this.exercicioContaGovernoSelecionada = 'Atual';
+    }
     },
     beforeUnmount() {
         this.destroyCkEditor();
