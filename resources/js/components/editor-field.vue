@@ -157,6 +157,7 @@ export default {
             listaFormulas: [],
             listaAnalises: [
                 "Modelo Análise",
+                "Município",
                 "Unidade Gestora",
                 "Exercício",
                 "Data de criação",
