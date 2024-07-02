@@ -7,8 +7,8 @@
                     <v-select
                         v-model="exercicioContaGovernoSelecionada"
                         :filterable="false"
-                        inputId="exercicio"
-                        label="exercicio"
+                        inputId="value"
+                        label="label"
                         :options="listaExercicio"
                     ></v-select>
                 </div>
@@ -172,7 +172,10 @@ export default {
             ],
             variavelContaGestaoSelecionada: null,
             variavelContaGovernoSelecionada: null,
-            exercicioContaGovernoSelecionada: "Atual",
+            exercicioContaGovernoSelecionada: {
+                label: 'Exercício da Análise',
+                value: 'Atual'
+            },
             formulaSelecionada: null,
             analiseSelecionada: null,
 
@@ -498,7 +501,7 @@ export default {
 
                     const viewFragment = editor.data.processor.toView(
                         "$_go_"+
-                            this.exercicioContaGovernoSelecionada +"_{" +
+                            this.exercicioContaGovernoSelecionada.value +"_{" +
                             this.variavelContaGovernoSelecionada.nome +
                             "}"
                     );
@@ -614,17 +617,22 @@ export default {
 
         this.mounted = true;
 
-        const currentYear = new Date().getFullYear();
         const baseYear = 2021;
+        const currentYear = new Date().getFullYear();
 
         for (let year = currentYear; year >= baseYear; year--) {
-            let label = year === currentYear ? 'Atual' : `Atual-${currentYear - year}`;
-            this.listaExercicio.push(label);
+            const numPreviousYears = currentYear - year;
+            const usePluralForm = numPreviousYears > 1;
+            const isCurrentYear = year === currentYear;
+            const description = `Exercício${usePluralForm ? 's' : ''} Anterior${usePluralForm ? 'es' : ''}`;
+
+            this.listaExercicio.push({
+                label: isCurrentYear ? 'Exercício da Análise' : `${numPreviousYears} ${description}`,
+                value: isCurrentYear ? 'Atual' : `Atual-${numPreviousYears}`
+            });
         }
 
-        if (this.listaExercicio.includes('Atual')) {
-        this.exercicioContaGovernoSelecionada = 'Atual';
-    }
+        this.exercicioContaGovernoSelecionada = this.listaExercicio[0];
     },
     beforeUnmount() {
         this.destroyCkEditor();
