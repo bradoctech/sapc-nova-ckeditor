@@ -655,9 +655,9 @@ export default {
     margin: 175px
 
 .fixed-container
-    position: fixed
+    position: sticky
     top: 0
-    width: 79.3%
+    width: 100%
     z-index: 100
     height: 180px
     padding-top: 10px
