@@ -1,90 +1,92 @@
 <template>
     <FieldWrapper>
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
-            <div v-if="field.showSelects" class="flex mb-3">
-                <div class="w-1/4 px-1">
-                    <strong class="block">Exercício</strong>
-                    <v-select
-                        v-model="exercicioContaGovernoSelecionada"
-                        :filterable="false"
-                        inputId="value"
-                        label="label"
-                        :options="listaExercicio"
-                    ></v-select>
+            <div class="bg-white" :class="{ 'fixed-container': fixed }">
+                <div v-if="field.showSelects" class="flex mb-3">
+                    <div class="w-1/4 px-1">
+                        <strong class="block">Exercício</strong>
+                        <v-select
+                            v-model="exercicioContaGovernoSelecionada"
+                            :filterable="false"
+                            inputId="value"
+                            label="label"
+                            :options="listaExercicio"
+                        ></v-select>
+                    </div>
                 </div>
-            </div>
-            <div v-if="field.showSelects" class="flex mb-3">
-                <div class="w-1/4 px-1">
-                   
-                    <strong class="block">Variável de Conta de Governo</strong>
-                    <v-select
-                        v-model="variavelContaGovernoSelecionada"
-                        :filterable="false"
-                        inputId="id"
-                        label="nome"
-                        :options="listaVariaveisContaGoverno"
-                        @search="fetchVariaveisContaGoverno"
-                    ></v-select>
-                    <button
-                        @click="addVariavelContaGoverno()"
-                        class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                        type="button"
-                    >
-                        Adicionar Conta de Governo
-                    </button>
-                </div>
-                <div class="w-1/4 px-1">
-                    <strong class="block">Variável de Conta de Gestão</strong>
-                    <v-select
-                        v-model="variavelContaGestaoSelecionada"
-                        :filterable="false"
-                        inputId="id"
-                        label="nome"
-                        :options="listaVariaveisContaGestao"
-                        @search="fetchVariaveisContaGestao"
-                    ></v-select>
-                    <button
-                        @click="addVariavelContaGestao()"
-                        class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                        type="button"
-                    >
-                        Adicionar Conta de Gestão
-                    </button>
-                </div>
-                <div class="w-1/4 px-1">
-                    <strong class="block">Fórmulas</strong>
-                    <v-select
-                        v-model="formulaSelecionada"
-                        :filterable="false"
-                        inputId="id"
-                        label="nome"
-                        :options="listaFormulas"
-                        @search="fetchFormulas"
-                    ></v-select>
-                    <button
-                        @click="addFormula()"
-                        class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                        type="button"
-                    >
-                        Adicionar Fórmula
-                    </button>
-                </div>
-                <div class="w-1/4 px-1">
-                    <strong class="block">Gerais</strong>
-                    <v-select
-                        v-model="analiseSelecionada"
-                        :filterable="false"
-                        inputId="id"
-                        label="nome"
-                        :options="listaAnalises"
-                    ></v-select>
-                    <button
-                        @click="addAnalise()"
-                        class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                        type="button"
-                    >
-                        Adicionar Análise
-                    </button>
+                <div v-if="field.showSelects" class="flex mb-3">
+                    <div class="w-1/4 px-1">
+                       
+                        <strong class="block">Variável de Conta de Governo</strong>
+                        <v-select
+                            v-model="variavelContaGovernoSelecionada"
+                            :filterable="false"
+                            inputId="id"
+                            label="nome"
+                            :options="listaVariaveisContaGoverno"
+                            @search="fetchVariaveisContaGoverno"
+                        ></v-select>
+                        <button
+                            @click="addVariavelContaGoverno()"
+                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                            type="button"
+                        >
+                            Adicionar Conta de Governo
+                        </button>
+                    </div>
+                    <div class="w-1/4 px-1">
+                        <strong class="block">Variável de Conta de Gestão</strong>
+                        <v-select
+                            v-model="variavelContaGestaoSelecionada"
+                            :filterable="false"
+                            inputId="id"
+                            label="nome"
+                            :options="listaVariaveisContaGestao"
+                            @search="fetchVariaveisContaGestao"
+                        ></v-select>
+                        <button
+                            @click="addVariavelContaGestao()"
+                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                            type="button"
+                        >
+                            Adicionar Conta de Gestão
+                        </button>
+                    </div>
+                    <div class="w-1/4 px-1">
+                        <strong class="block">Fórmulas</strong>
+                        <v-select
+                            v-model="formulaSelecionada"
+                            :filterable="false"
+                            inputId="id"
+                            label="nome"
+                            :options="listaFormulas"
+                            @search="fetchFormulas"
+                        ></v-select>
+                        <button
+                            @click="addFormula()"
+                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                            type="button"
+                        >
+                            Adicionar Fórmula
+                        </button>
+                    </div>
+                    <div class="w-1/4 px-1">
+                        <strong class="block">Gerais</strong>
+                        <v-select
+                            v-model="analiseSelecionada"
+                            :filterable="false"
+                            inputId="id"
+                            label="nome"
+                            :options="listaAnalises"
+                        ></v-select>
+                        <button
+                            @click="addAnalise()"
+                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                            type="button"
+                        >
+                            Adicionar Análise
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -151,6 +153,7 @@ export default {
     data() {
         return {
             mounted: false,
+            fixed: false,
             listaVariaveisContaGestao: [],
             listaVariaveisContaGoverno: [],
             listaExercicio: [],
@@ -633,6 +636,12 @@ export default {
         }
 
         this.exercicioContaGovernoSelecionada = this.listaExercicio[0];
+
+        /** Limite em pixels partindo do topo */
+        const limitFixedScroll = 380;
+        window.addEventListener('scroll', () => {
+            this.fixed = window.scrollY > limitFixedScroll;
+        });
     },
     beforeUnmount() {
         this.destroyCkEditor();
@@ -641,6 +650,17 @@ export default {
 </script>
 
 <style lang="sass">
+
+.ck.ck-sticky-panel .ck-sticky-panel__content_sticky
+    margin: 175px
+
+.fixed-container
+    position: fixed
+    top: 0
+    width: 79.3%
+    z-index: 100
+    height: 180px
+    padding-top: 10px
 
 .vs__dropdown-menu
     display: block
