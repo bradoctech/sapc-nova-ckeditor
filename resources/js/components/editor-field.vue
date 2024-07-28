@@ -159,19 +159,22 @@ export default {
             listaExercicio: [],
             listaFormulas: [],
             listaAnalises: [
-                "Modelo Análise",
-                "Município",
-                "Unidade Gestora",
-                "Exercício",
-                "Data de criação",
-                "Data de conclusão",
-                "Assinatura",
-                "Status",
-                "Diretoria",
-                "Gestor",
-                "Protocolo eTCE",
-                "Controlador",
-                "Responsáveis Técnicos",
+                { text: "Modelo Análise", value: "{Modelo Análise}" },
+                { text: "Município", value: "{Município}" },
+                { text: "Unidade Gestora", value: "{Unidade Gestora}" },
+                { text: "Exercício da Análise", value: "_Atual{Exercício}" },
+                { text: "1 Exercício Anterior", value: "_Atual-1{Exercício}" },
+                { text: "2 Exercícios Anteriores", value: "_Atual-2{Exercício}" },
+                { text: "3 Exercícios Anteriores", value: "_Atual-3{Exercício}" },
+                { text: "Data de criação", value: "{Data de criação}" },
+                { text: "Data de conclusão", value: "{Data de conclusão}" },
+                { text: "Assinatura", value: "{Assinatura}" },
+                { text: "Status", value: "{Status}" },
+                { text: "Diretoria", value: "{Diretoria}" },
+                { text: "Gestor", value: "{Gestor}" },
+                { text: "Protocolo eTCE", value: "{Protocolo eTCE}" },
+                { text: "Controlador", value: "{Controlador}" },
+                { text: "Responsáveis Técnicos", value: "{Responsáveis Técnicos}" }
             ],
             variavelContaGestaoSelecionada: null,
             variavelContaGovernoSelecionada: null,
@@ -538,7 +541,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        "$_al{" + this.analiseSelecionada + "}"
+                        `$_al${this.analiseSelecionada.value}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
