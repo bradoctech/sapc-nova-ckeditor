@@ -76,7 +76,7 @@
                             v-model="analiseSelecionada"
                             :filterable="false"
                             inputId="id"
-                            label="nome"
+                            label="text"
                             :options="listaAnalises"
                         ></v-select>
                         <button
