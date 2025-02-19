@@ -18,5 +18,9 @@ Route::as('nova-ckeditor.')->middleware('nova')->group(function () {
         Route::get('/rreo-anexos', [ApiController::class, 'listRREOAnexos'])->name('siconfi_rreo.anexo');
         Route::get('/rreo-contas/anexo/{anexo}', [ApiController::class, 'listRREOContasByAnexo'])->name('siconfi_rreo.anexo_conta');
         Route::get('/rreo-colunas/anexo/{anexo}/conta/{conta}', [ApiController::class, 'listRREOColunasByAnexoAndConta'])->name('siconfi_rreo.anexo_conta_coluna');
+        
+        Route::get('/rgf-anexos', [ApiController::class, 'listRGFAnexos'])->name('siconfi_rgf.anexo');
+        Route::get('/rgf-contas/anexo/{anexo}', [ApiController::class, 'listRGFContasByAnexo'])->name('siconfi_rgf.anexo_conta');
+        Route::get('/rgf-colunas/anexo/{anexo}/conta/{conta}', [ApiController::class, 'listRGFColunasByAnexoAndConta'])->name('siconfi_rgf.anexo_conta_coluna');
     });
 });
