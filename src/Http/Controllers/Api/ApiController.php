@@ -28,4 +28,27 @@ class ApiController extends Controller
         $listaVariavel = VariavelContaGoverno::where('nome', 'LIKE', "%{$term}%")->get();
         return response()->json($listaVariavel);
     }
+
+    public function listRREOAnexos()
+    {
+        $anexos = SiconfiRREO::select('anexo')->distinct()->get();
+        return response()->json($anexos);
+    }
+    
+    public function listRREOContasByAnexo($anexo)
+    {
+        $contas = SiconfiRREO::select('conta')->where('anexo', $anexo)->distinct()->get();
+        return response()->json($contas);
+    }
+
+    public function listRREOColunasByAnexoAndConta($anexo, $conta)
+    {
+        $colunas = SiconfiRREO::select('coluna')
+            ->where('anexo', $anexo)
+            ->where('conta', $conta)
+            ->distinct()
+            ->get();
+
+        return response()->json($colunas);
+    }
 }
