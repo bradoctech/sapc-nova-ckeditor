@@ -642,7 +642,7 @@ export default {
                 editor.model.change((writer) => {
                     const insertPosition =
                         editor.model.document.selection.getFirstPosition();
-
+                         
                     const viewFragment = editor.data.processor.toView(
                         `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
                     );
