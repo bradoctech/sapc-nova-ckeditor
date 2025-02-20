@@ -628,7 +628,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_+_`+`${this.variavelRREOContaSelecionada.conta}_+_`+`${this.variavelRREOColunaSelecionada.coluna}}`
+                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
@@ -644,7 +644,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_+_`+`${this.variavelRGFContaSelecionada.conta}_+_`+`${this.variavelRGFColunaSelecionada.coluna}}`
+                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
