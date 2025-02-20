@@ -3,8 +3,8 @@
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
             <div class="bg-white" :class="{ 'fixed-container': fixed }">
                 <div v-if="field.showSelects" class="flex mb-3">
-                    <div class="w-1/4 px-1">
-                        <strong class="block">Exercício</strong>
+                    <div class="w-1/6 px-1">
+                        <strong class="block">Exercícioasdfa</strong>
                         <v-select
                             v-model="exercicioContaGovernoSelecionada"
                             :filterable="false"
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div v-if="field.showSelects" class="flex mb-3">
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                        
                         <strong class="block">Variável de Conta de Governo</strong>
                         <v-select
@@ -33,8 +33,8 @@
                         >
                             Adicionar Conta de Governo
                         </button>
-                    </div>
-                    <div class="w-1/4 px-1">
+                    </div>                    
+                    <div class="w-1/6 px-1">
                         <strong class="block">Variável de Conta de Gestão</strong>
                         <v-select
                             v-model="variavelContaGestaoSelecionada"
@@ -52,7 +52,7 @@
                             Adicionar Conta de Gestão
                         </button>
                     </div>
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                         <strong class="block">Fórmulas</strong>
                         <v-select
                             v-model="formulaSelecionada"
@@ -70,7 +70,82 @@
                             Adicionar Fórmula
                         </button>
                     </div>
-                    <div class="w-1/4 px-1">
+
+                    <div class="w-1/6 px-1">
+                       
+                       <strong class="block">Variável de RREO</strong>
+                       <v-select
+                           v-model="variavelRREOAnexoSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="anexo"
+                           :options="listaRREOAnexo"
+                           @search="fetchRREOAnexo"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRREOContaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="conta"
+                           :disabled="!variavelRREOAnexoSelecionada"
+                           :options="listaRREOConta"
+                           @search="fetchRREOConta"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRREOColunaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="coluna"
+                           :disabled="!variavelRREOAnexoSelecionada || !variavelRREOContaSelecionada"
+                           :options="listaRREOColuna"
+                           @search="fetchRREOColuna"
+                       ></v-select>
+                       <button
+                           @click="addRREO()"
+                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                           type="button"
+                       >
+                           Adicionar RREO
+                       </button>
+                   </div> 
+                   <div class="w-1/6 px-1">
+                       
+                       <strong class="block">Variável de RGF</strong>
+                       <v-select
+                           v-model="variavelRGFAnexoSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="anexo"
+                           :options="listaRGFAnexo"
+                           @search="fetchRGFAnexo"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRGFContaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="conta"
+                           :disabled="!variavelRGFAnexoSelecionada"
+                           :options="listaRGFConta"
+                           @search="fetchRGFConta"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRGFColunaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="coluna"
+                           :disabled="!variavelRGFAnexoSelecionada || !variavelRGFContaSelecionada"
+                           :options="listaRGFColuna"
+                           @search="fetchRGFColuna"
+                       ></v-select>
+                       <button
+                           @click="addRGF()"
+                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                           type="button"
+                       >
+                           Adicionar RGF
+                       </button>
+                   </div>     
+                    <div class="w-1/6 px-1">
                         <strong class="block">Gerais</strong>
                         <v-select
                             v-model="analiseSelecionada"
@@ -158,6 +233,12 @@ export default {
             listaVariaveisContaGoverno: [],
             listaExercicio: [],
             listaFormulas: [],
+            listaRREOAnexo: [],
+            listaRREOConta: [],
+            listaRREOColuna: [],
+            listaRGFAnexo: [],
+            listaRGFConta: [],
+            listaRGFColuna: [],
             listaAnalises: [
                 { text: "Modelo Análise", value: "{Modelo Análise}" },
                 { text: "Município", value: "{Município}" },
@@ -183,6 +264,12 @@ export default {
                 value: 'Atual'
             },
             formulaSelecionada: null,
+            variavelRREOAnexoSelecionada: null,
+            variavelRREOContaSelecionada: null,
+            variavelRREOColunaSelecionada: null,
+            variavelRGFAnexoSelecionada: null,
+            variavelRGFContaSelecionada: null,
+            variavelRGFColunaSelecionada: null,
             analiseSelecionada: null,
 
             fieldName: { type: String },
@@ -533,6 +620,38 @@ export default {
             }
         },
 
+        addRREO() {
+            const editor = this.$options[this.editorName];
+            if (editor) {
+                editor.model.change((writer) => {
+                    const insertPosition =
+                        editor.model.document.selection.getFirstPosition();
+
+                    const viewFragment = editor.data.processor.toView(
+                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_+_`+`${this.variavelRREOContaSelecionada.conta}_+_`+`${this.variavelRREOColunaSelecionada.coluna}}`
+                    );
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment, insertPosition);
+                });
+            }
+        },
+
+        addRGF() {
+            const editor = this.$options[this.editorName];
+            if (editor) {
+                editor.model.change((writer) => {
+                    const insertPosition =
+                        editor.model.document.selection.getFirstPosition();
+
+                    const viewFragment = editor.data.processor.toView(
+                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_+_`+`${this.variavelRGFContaSelecionada.conta}_+_`+`${this.variavelRGFColunaSelecionada.coluna}}`
+                    );
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment, insertPosition);
+                });
+            }
+        },
+
         addAnalise() {
             const editor = this.$options[this.editorName];
             if (editor) {
@@ -586,6 +705,120 @@ export default {
                     )
                     .then((res) => {
                         this.listaVariaveisContaGoverno = res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRREOAnexo(search, loading) {
+            loading(true);
+            if (search != "") {
+                this.variavelRREOAnexoSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-anexos/${encodeURIComponent(
+                            search
+                        )}`
+                    )
+                    .then((res) => {
+                        this.listaRREOAnexo = res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRGFAnexo(search, loading) {
+            loading(true);
+            if (search != "") {
+                this.variavelRGFAnexoSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-anexos/${encodeURIComponent(
+                            search
+                        )}`
+                    )
+                    .then((res) => {
+                        this.listaRGFAnexo = res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRREOConta(search, loading) {
+            loading(true);
+
+            if (search != "") {
+                this.variavelRREOContaSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-contas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/${encodeURIComponent(
+                            search
+                        )}`
+                    )
+                    .then((res) => {
+                        this.listaRREOConta= res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRGFConta(search, loading) {
+            loading(true);
+
+            if (search != "") {
+                this.variavelRGFContaSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-contas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/${encodeURIComponent(
+                            search
+                        )}`
+                    )
+                    .then((res) => {
+                        this.listaRGFConta= res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRREOColuna(search, loading) {
+            loading(true);
+
+            if (search != "") {
+                this.variavelRREOColunaSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.conta)}/${encodeURIComponent(search)}`
+                    )
+                    .then((res) => {
+                        this.listaRREOColuna= res.data;
+                    })
+                    .catch();
+            }
+
+            loading(false);
+        },
+
+        async fetchRGFColuna(search, loading) {
+            loading(true);
+
+            if (search != "") {
+                this.variavelRGFColunaSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.conta)}/${encodeURIComponent(search)}`
+                    )
+                    .then((res) => {
+                        this.listaRGFColuna= res.data;
                     })
                     .catch();
             }
