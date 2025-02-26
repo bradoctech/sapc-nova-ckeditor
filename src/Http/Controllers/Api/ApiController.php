@@ -29,4 +29,52 @@ class ApiController extends Controller
         $listaVariavel = VariavelContaGoverno::where('nome', 'LIKE', "%{$term}%")->get();
         return response()->json($listaVariavel);
     }
+
+    public function listRREOAnexos($term)
+    {
+        $anexos = SiconfiRREO::select('anexo')->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
+        return response()->json($anexos);
+    }
+    
+    public function listRREOContasByAnexo($anexo, $term)
+    {
+        $contas = SiconfiRREO::select('conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        return response()->json($contas);
+    }
+
+    public function listRREOColunasByAnexoAndConta($anexo, $conta, $term)
+    {
+        $colunas = SiconfiRREO::select('coluna')
+            ->where('anexo', $anexo)
+            ->where('conta', $conta)
+            ->where('coluna', 'ILIKE', "%{$term}%")
+            ->distinct()
+            ->get();
+
+        return response()->json($colunas);
+    }
+
+    public function listRGFAnexos($term)
+    {
+        $anexos = SiconfiRGF::select('anexo')->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
+        return response()->json($anexos);
+    }
+    
+    public function listRGFContasByAnexo($anexo, $term)
+    {
+        $contas = SiconfiRGF::select('conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        return response()->json($contas);
+    }
+
+    public function listRGFColunasByAnexoAndConta($anexo, $conta, $term)
+    {
+        $colunas = SiconfiRGF::select('coluna')
+            ->where('anexo', $anexo)
+            ->where('conta', $conta)
+            ->where('coluna', 'ILIKE', "%{$term}%")
+            ->distinct()
+            ->get();
+
+        return response()->json($colunas);
+    }
 }
