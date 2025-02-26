@@ -3,7 +3,7 @@
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
             <div class="bg-white" :class="{ 'fixed-container': fixed }">
                 <div v-if="field.showSelects" class="flex mb-3">
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                         <strong class="block">Exercício</strong>
                         <v-select
                             v-model="exercicioContaGovernoSelecionada"
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div v-if="field.showSelects" class="flex mb-3">
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                        
                         <strong class="block">Variável de Conta de Governo</strong>
                         <v-select
@@ -34,7 +34,7 @@
                             Adicionar Conta de Governo
                         </button>
                     </div>                    
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                         <strong class="block">Variável de Conta de Gestão</strong>
                         <v-select
                             v-model="variavelContaGestaoSelecionada"
@@ -52,7 +52,7 @@
                             Adicionar Conta de Gestão
                         </button>
                     </div>
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                         <strong class="block">Fórmulas</strong>
                         <v-select
                             v-model="formulaSelecionada"
@@ -70,8 +70,83 @@
                             Adicionar Fórmula
                         </button>
                     </div>
+
+                    <div class="w-1/6 px-1">
+                       
+                       <strong class="block">Variável de RREO</strong>
+                       <v-select
+                           v-model="variavelRREOAnexoSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="anexo"
+                           :options="listaRREOAnexo"
+                           @search="fetchRREOAnexo"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRREOContaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="conta"
+                           :disabled="!variavelRREOAnexoSelecionada"
+                           :options="listaRREOConta"
+                           @search="fetchRREOConta"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRREOColunaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="coluna"
+                           :disabled="!variavelRREOAnexoSelecionada || !variavelRREOContaSelecionada"
+                           :options="listaRREOColuna"
+                           @search="fetchRREOColuna"
+                       ></v-select>
+                       <button
+                           @click="addRREO()"
+                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                           type="button"
+                       >
+                           Adicionar RREO
+                       </button>
+                   </div> 
+                   <div class="w-1/6 px-1">
+                       
+                       <strong class="block">Variável de RGF</strong>
+                       <v-select
+                           v-model="variavelRGFAnexoSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="anexo"
+                           :options="listaRGFAnexo"
+                           @search="fetchRGFAnexo"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRGFContaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="conta"
+                           :disabled="!variavelRGFAnexoSelecionada"
+                           :options="listaRGFConta"
+                           @search="fetchRGFConta"
+                       ></v-select>
+                       <v-select
+                           v-model="variavelRGFColunaSelecionada"
+                           :filterable="false"
+                           inputId="id"
+                           label="coluna"
+                           :disabled="!variavelRGFAnexoSelecionada || !variavelRGFContaSelecionada"
+                           :options="listaRGFColuna"
+                           @search="fetchRGFColuna"
+                       ></v-select>
+                       <button
+                           @click="addRGF()"
+                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                           type="button"
+                       >
+                           Adicionar RGF
+                       </button>
+                   </div>     
                    
-                    <div class="w-1/4 px-1">
+                    <div class="w-1/6 px-1">
                         <strong class="block">Gerais</strong>
                         <v-select
                             v-model="analiseSelecionada"
