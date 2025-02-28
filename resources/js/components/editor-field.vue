@@ -86,7 +86,7 @@
                            v-model="variavelRREOContaSelecionada"
                            :filterable="false"
                            inputId="id"
-                           label="conta"
+                           label="cod_conta"
                            :disabled="!variavelRREOAnexoSelecionada"
                            :options="listaRREOConta"
                            @search="fetchRREOConta"
@@ -123,7 +123,7 @@
                            v-model="variavelRGFContaSelecionada"
                            :filterable="false"
                            inputId="id"
-                           label="conta"
+                           label="cod_conta"
                            :disabled="!variavelRGFAnexoSelecionada"
                            :options="listaRGFConta"
                            @search="fetchRGFConta"
@@ -629,7 +629,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
+                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.cod_conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
@@ -645,7 +645,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
                          
                     const viewFragment = editor.data.processor.toView(
-                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
+                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.cod_conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
@@ -763,6 +763,7 @@ export default {
                         )}`
                     )
                     .then((res) => {
+                        
                         this.listaRREOConta= res.data;
                     })
                     .catch();
@@ -798,7 +799,7 @@ export default {
                 this.variavelRREOColunaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.conta)}/${encodeURIComponent(search)}`
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
                     )
                     .then((res) => {
                         this.listaRREOColuna= res.data;
@@ -816,7 +817,7 @@ export default {
                 this.variavelRGFColunaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.conta)}/${encodeURIComponent(search)}`
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
                     )
                     .then((res) => {
                         this.listaRGFColuna= res.data;

@@ -38,7 +38,7 @@ class ApiController extends Controller
     
     public function listRREOContasByAnexo($anexo, $term)
     {
-        $contas = SiconfiRREO::select('conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        $contas = SiconfiRREO::select('cod_conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
         return response()->json($contas);
     }
 
@@ -46,7 +46,7 @@ class ApiController extends Controller
     {
         $colunas = SiconfiRREO::select('coluna')
             ->where('anexo', $anexo)
-            ->where('conta', $conta)
+            ->where('cod_conta', $conta)
             ->where('coluna', 'ILIKE', "%{$term}%")
             ->distinct()
             ->get();
@@ -62,7 +62,7 @@ class ApiController extends Controller
     
     public function listRGFContasByAnexo($anexo, $term)
     {
-        $contas = SiconfiRGF::select('conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        $contas = SiconfiRGF::select('cod_conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
         return response()->json($contas);
     }
 
@@ -70,7 +70,7 @@ class ApiController extends Controller
     {
         $colunas = SiconfiRGF::select('coluna')
             ->where('anexo', $anexo)
-            ->where('conta', $conta)
+            ->where('cod_conta', $conta)
             ->where('coluna', 'ILIKE', "%{$term}%")
             ->distinct()
             ->get();
