@@ -2,7 +2,7 @@
     <FieldWrapper>
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
             <div class="bg-white" :class="{ 'fixed-container': fixed }">
-                <div v-if="field.showSelects" class="flex mb-3">
+                <div v-if="field.showSelects" class="flex mb-3 bg-white">
                     <div class="w-1/6 px-1">
                         <strong class="block">Exercício</strong>
                         <v-select
@@ -14,8 +14,8 @@
                         ></v-select>
                     </div>
                 </div>
-                <div v-if="field.showSelects" class="flex mb-3">
-                    <div class="w-1/6 px-1">
+                <div v-if="field.showSelects" class="flex mb-3 bg-white">
+                    <div class="w-1/6 px-1 bg-white">
                        
                         <strong class="block">Variável de Conta de Governo</strong>
                         <v-select
@@ -34,7 +34,7 @@
                             Adicionar Conta de Governo
                         </button>
                     </div>                    
-                    <div class="w-1/6 px-1">
+                    <div class="w-1/6 px-1 bg-white">
                         <strong class="block">Variável de Conta de Gestão</strong>
                         <v-select
                             v-model="variavelContaGestaoSelecionada"
@@ -876,7 +876,7 @@ export default {
         this.exercicioContaGovernoSelecionada = this.listaExercicio[0];
 
         /** Limite em pixels partindo do topo */
-        const limitFixedScroll = 380;
+        const limitFixedScroll = 480;
         window.addEventListener('scroll', () => {
             this.fixed = window.scrollY > limitFixedScroll;
         });
@@ -890,7 +890,7 @@ export default {
 <style lang="sass">
 
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky
-    margin: 175px
+    margin: 295px
 
 .fixed-container
     position: sticky
