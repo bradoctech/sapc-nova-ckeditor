@@ -2,168 +2,239 @@
     <FieldWrapper>
         <div class="mt-4 md:mt-0 pb-5 px-6 md:px-8 w-full">
             <div class="bg-white" :class="{ 'fixed-container': fixed }">
-                <div v-if="field.showSelects" class="flex mb-3 bg-white">
-                    <div class="w-1/6 px-1">
-                        <strong class="block">Exercício</strong>
-                        <v-select
-                            v-model="exercicioContaGovernoSelecionada"
-                            :filterable="false"
-                            inputId="value"
-                            label="label"
-                            :options="listaExercicio"
-                        ></v-select>
-                    </div>
-                </div>
-                <div v-if="field.showSelects" class="flex mb-3 bg-white">
-                    <div class="w-1/6 px-1 bg-white">
-                       
-                        <strong class="block">Variável de Conta de Governo</strong>
-                        <v-select
-                            v-model="variavelContaGovernoSelecionada"
-                            :filterable="false"
-                            inputId="id"
-                            label="nome"
-                            :options="listaVariaveisContaGoverno"
-                            @search="fetchVariaveisContaGoverno"
-                        ></v-select>
-                        <button
-                            @click="addVariavelContaGoverno()"
-                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                            type="button"
-                        >
-                            Adicionar Conta de Governo
-                        </button>
-                    </div>                    
-                    <div class="w-1/6 px-1 bg-white">
-                        <strong class="block">Variável de Conta de Gestão</strong>
-                        <v-select
-                            v-model="variavelContaGestaoSelecionada"
-                            :filterable="false"
-                            inputId="id"
-                            label="nome"
-                            :options="listaVariaveisContaGestao"
-                            @search="fetchVariaveisContaGestao"
-                        ></v-select>
-                        <button
-                            @click="addVariavelContaGestao()"
-                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                            type="button"
-                        >
-                            Adicionar Conta de Gestão
-                        </button>
-                    </div>
-                    <div class="w-1/6 px-1">
-                        <strong class="block">Fórmulas</strong>
-                        <v-select
-                            v-model="formulaSelecionada"
-                            :filterable="false"
-                            inputId="id"
-                            label="nome"
-                            :options="listaFormulas"
-                            @search="fetchFormulas"
-                        ></v-select>
-                        <button
-                            @click="addFormula()"
-                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                            type="button"
-                        >
-                            Adicionar Fórmula
-                        </button>
-                    </div>
+                
 
-                    <div class="w-1/6 px-1">
-                       
-                       <strong class="block">Variável de RREO</strong>
-                       <v-select
-                           v-model="variavelRREOAnexoSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="anexo"
-                           :options="listaRREOAnexo"
-                           @search="fetchRREOAnexo"
-                       ></v-select>
-                       <v-select
-                           v-model="variavelRREOContaSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="cod_conta"
-                           :disabled="!variavelRREOAnexoSelecionada"
-                           :options="listaRREOConta"
-                           @search="fetchRREOConta"
-                       ></v-select>
-                       <v-select
-                           v-model="variavelRREOColunaSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="coluna"
-                           :disabled="!variavelRREOAnexoSelecionada || !variavelRREOContaSelecionada"
-                           :options="listaRREOColuna"
-                           @search="fetchRREOColuna"
-                       ></v-select>
-                       <button
-                           @click="addRREO()"
-                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                           type="button"
-                       >
-                           Adicionar RREO
-                       </button>
-                   </div> 
-                   <div class="w-1/6 px-1">
-                       
-                       <strong class="block">Variável de RGF</strong>
-                       <v-select
-                           v-model="variavelRGFAnexoSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="anexo"
-                           :options="listaRGFAnexo"
-                           @search="fetchRGFAnexo"
-                       ></v-select>
-                       <v-select
-                           v-model="variavelRGFContaSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="cod_conta"
-                           :disabled="!variavelRGFAnexoSelecionada"
-                           :options="listaRGFConta"
-                           @search="fetchRGFConta"
-                       ></v-select>
-                       <v-select
-                           v-model="variavelRGFColunaSelecionada"
-                           :filterable="false"
-                           inputId="id"
-                           label="coluna"
-                           :disabled="!variavelRGFAnexoSelecionada || !variavelRGFContaSelecionada"
-                           :options="listaRGFColuna"
-                           @search="fetchRGFColuna"
-                       ></v-select>
-                       <button
-                           @click="addRGF()"
-                           class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                           type="button"
-                       >
-                           Adicionar RGF
-                       </button>
-                   </div>     
+
+                <Tabs  :options="{ useUrlFragment: false }">
+                    <Tab name="SAPC" tab="tab1">
+                        <div v-if="field.showSelects" class="flex mb-3 bg-white">
+                            <div class="w-1/6 px-1">
+                                <strong class="block">Exercício</strong>
+                                <v-select
+                                    v-model="exercicioContaGovernoSelecionada"
+                                    :filterable="false"
+                                    inputId="value"
+                                    label="label"
+                                    :options="listaExercicio"
+                                ></v-select>
+                            </div>
+                
                    
-                    <div class="w-1/6 px-1">
-                        <strong class="block">Gerais</strong>
-                        <v-select
-                            v-model="analiseSelecionada"
-                            :filterable="false"
-                            inputId="id"
-                            label="text"
-                            :options="listaAnalises"
-                        ></v-select>
-                        <button
-                            @click="addAnalise()"
-                            class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
-                            type="button"
-                        >
-                            Adicionar Análise
-                        </button>
-                    </div>
-                </div>
+                            <div class="w-1/6 px-1">
+                                <strong class="block">Gerais</strong>
+                                <v-select
+                                    v-model="analiseSelecionada"
+                                    :filterable="false"
+                                    inputId="id"
+                                    label="text"
+                                    :options="listaAnalises"
+                                ></v-select>
+                                <button
+                                    @click="addAnalise()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Análise
+                                </button>
+                            </div>
+
+                            <div class="w-1/6 px-1 bg-white">
+                            
+                                <strong class="block">Variável de Conta de Governo</strong>
+                                <v-select
+                                    v-model="variavelContaGovernoSelecionada"
+                                    :filterable="false"
+                                    inputId="id"
+                                    label="nome"
+                                    :options="listaVariaveisContaGoverno"
+                                    @search="fetchVariaveisContaGoverno"
+                                ></v-select>
+                                <button
+                                    @click="addVariavelContaGoverno()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Conta de Governo
+                                </button>
+                            </div>                    
+                            <div class="w-1/6 px-1 bg-white">
+                                <strong class="block">Variável de Conta de Gestão</strong>
+                                <v-select
+                                    v-model="variavelContaGestaoSelecionada"
+                                    :filterable="false"
+                                    inputId="id"
+                                    label="nome"
+                                    :options="listaVariaveisContaGestao"
+                                    @search="fetchVariaveisContaGestao"
+                                ></v-select>
+                                <button
+                                    @click="addVariavelContaGestao()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Conta de Gestão
+                                </button>
+                            </div>
+                            <div class="w-1/6 px-1">
+                                <strong class="block">Fórmulas</strong>
+                                <v-select
+                                    v-model="formulaSelecionada"
+                                    :filterable="false"
+                                    inputId="id"
+                                    label="nome"
+                                    :options="listaFormulas"
+                                    @search="fetchFormulas"
+                                ></v-select>
+                                <button
+                                    @click="addFormula()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Fórmula
+                                </button>
+                            </div>
+                        </div>
+
+                    </Tab>
+                    <Tab name="RREO" tab="tab2">
+                        <div v-if="field.showSelects" class="">
+                            <div class="w-full px-1 flex">
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Período</strong>
+                                    <v-select
+                                        v-model="variavelRREOPeriodoSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="text"
+                                        :options="listaRREOPeriodo"
+                                    ></v-select>
+                                </div>
+
+                               
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Anexo</strong>
+                                    <v-select
+                                        v-model="variavelRREOAnexoSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="anexo"
+                                        :options="listaRREOAnexo"
+                                        @search="fetchRREOAnexo"
+                                    ></v-select>
+                                </div>
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Conta</strong>
+                                    <v-select
+                                        v-model="variavelRREOContaSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="cod_conta"
+                                        :disabled="!variavelRREOAnexoSelecionada"
+                                        :options="listaRREOConta"
+                                        @search="fetchRREOConta"
+                                    ></v-select>
+                                </div>
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Coluna</strong>
+                                    <v-select
+                                        v-model="variavelRREOColunaSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="coluna"
+                                        :disabled="!variavelRREOAnexoSelecionada || !variavelRREOContaSelecionada"
+                                        :options="listaRREOColuna"
+                                        @search="fetchRREOColuna"
+                                    ></v-select>
+                                </div>
+                            </div> 
+
+                            <div class="w-full px-1">
+                                <button
+                                    @click="addRREO()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Variável RREO
+                                </button>
+                            </div>
+                        </div>
+                    </Tab>
+                    <Tab name="RGF" tab="tab3">
+                        <div v-if="field.showSelects" class="">
+                            <div class="w-full px-1 flex">
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Poder</strong>
+                                    <v-select
+                                        v-model="variavelRGFPoderSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="text"
+                                        :options="listaRGFPoder"
+                                    ></v-select>
+                                </div>
+                                
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Período</strong>
+                                    <v-select
+                                        v-model="variavelRGFPeriodoSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="text"
+                                        :options="listaRGFPeriodo"
+                                    ></v-select>
+                                </div>
+
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Anexo</strong>
+                                    <v-select
+                                        v-model="variavelRGFAnexoSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="anexo"
+                                        :options="listaRGFAnexo"
+                                        @search="fetchRGFAnexo"
+                                    ></v-select>
+                                </div>
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Conta</strong>
+                                    <v-select
+                                        v-model="variavelRGFContaSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="cod_conta"
+                                        :disabled="!variavelRGFAnexoSelecionada"
+                                        :options="listaRGFConta"
+                                        @search="fetchRGFConta"
+                                    ></v-select>
+                                </div>
+
+                                <div class="w-1/3 px-1">
+                                    <strong class="block">Coluna</strong>
+                                    <v-select
+                                        v-model="variavelRGFColunaSelecionada"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="coluna"
+                                        :disabled="!variavelRGFAnexoSelecionada || !variavelRGFContaSelecionada"
+                                        :options="listaRGFColuna"
+                                        @search="fetchRGFColuna"
+                                    ></v-select>
+                                </div>
+                            </div>    
+                            <div class="w-full px-1">
+                                <button
+                                    @click="addRGF()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Variável RGF
+                                </button>
+                            </div> 
+                        </div>
+                    </Tab>
+                </Tabs>
+                
+                
             </div>
 
             <textarea
@@ -221,11 +292,12 @@ import { DependentFormField, HandlesValidationErrors } from "laravel-nova";
 import debounce from "lodash/debounce";
 import RegexParser from "regex-parser";
 import vSelect from "vue-select";
+import {Tabs, Tab} from 'vue3-tabs-component';
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
     props: ["resourceName", "resourceId", "field", "toolbar", "formUniqueId"],
-    components: { SnippetBrowser, MediaBrowser, vSelect },
+    components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab },
     data() {
         return {
             mounted: false,
@@ -234,9 +306,26 @@ export default {
             listaVariaveisContaGoverno: [],
             listaExercicio: [],
             listaFormulas: [],
+            listaRREOPeriodo: [
+                { text: "Período 1", value: "1" },
+                { text: "Período 2", value: "2" },
+                { text: "Período 3", value: "3" },
+                { text: "Período 4", value: "4" },
+                { text: "Período 5", value: "5" },
+                { text: "Período 6", value: "6" },
+            ],
             listaRREOAnexo: [],
             listaRREOConta: [],
             listaRREOColuna: [],
+            listaRGFPeriodo: [
+                { text: "Período 1 (Q1/S1)", value: "1" },
+                { text: "Período 2 (Q2/S1)", value: "2" },
+                { text: "Período 3 (Q3/S2)", value: "3" },
+            ],
+            listaRGFPoder: [
+                { text: "Executivo", value: "E" },
+                { text: "Legislativo", value: "L" },
+            ],
             listaRGFAnexo: [],
             listaRGFConta: [],
             listaRGFColuna: [],
@@ -265,9 +354,12 @@ export default {
                 value: 'Atual'
             },
             formulaSelecionada: null,
+            variavelRREOPeriodoSelecionada: null,
             variavelRREOAnexoSelecionada: null,
             variavelRREOContaSelecionada: null,
             variavelRREOColunaSelecionada: null,
+            variavelRGFPeriodoSelecionada: null,
+            variavelRGFPoderSelecionada: null,
             variavelRGFAnexoSelecionada: null,
             variavelRGFContaSelecionada: null,
             variavelRGFColunaSelecionada: null,
@@ -350,6 +442,7 @@ export default {
                     items: this.currentField.toolbar,
                     shouldNotGroupWhenFull:
                         this.currentField.shouldNotGroupWhenFull,
+                    viewportTopOffset: 15,
                 },
                 simpleUpload: {
                     ...CkEditor.defaultConfig.simpleUpload,
@@ -629,7 +722,7 @@ export default {
                         editor.model.document.selection.getFirstPosition();
 
                     const viewFragment = editor.data.processor.toView(
-                        `$_rreo{` +`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.cod_conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
+                        `$_rreo{`+`${this.variavelRREOPeriodoSelecionada.value}_`+`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.cod_conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
@@ -643,9 +736,9 @@ export default {
                 editor.model.change((writer) => {
                     const insertPosition =
                         editor.model.document.selection.getFirstPosition();
-                         
+                         console.log(this.variavelRGFPoderSelecionada);
                     const viewFragment = editor.data.processor.toView(
-                        `$_rgf{` +`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.cod_conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
+                        `$_rgf{`+`${this.variavelRGFPoderSelecionada.value}_`+`${this.variavelRGFPeriodoSelecionada.value}_`+`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.cod_conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
@@ -876,9 +969,15 @@ export default {
         this.exercicioContaGovernoSelecionada = this.listaExercicio[0];
 
         /** Limite em pixels partindo do topo */
-        const limitFixedScroll = 480;
+        const limitFixedScroll = 550;
         window.addEventListener('scroll', () => {
-            this.fixed = window.scrollY > limitFixedScroll;
+            console.log(window.scrollY);
+            
+            if (window.scrollY > limitFixedScroll && !this.fixed) {
+                this.fixed = true;
+            } else if (window.scrollY <= limitFixedScroll - 100 && this.fixed) {
+                this.fixed = false;
+            }
         });
     },
     beforeUnmount() {
@@ -890,7 +989,7 @@ export default {
 <style lang="sass">
 
 .ck.ck-sticky-panel .ck-sticky-panel__content_sticky
-    margin: 295px
+    margin: 165px
 
 .fixed-container
     position: sticky
@@ -898,7 +997,7 @@ export default {
     width: 100%
     z-index: 100
     height: 180px
-    padding-top: 10px
+    padding-top: 1px
 
 .vs__dropdown-menu
     display: block
