@@ -1,5 +1,6 @@
 export default {
     toolbar: {
+        viewportTopOffset:30,
         items: [
             'heading',
             'horizontalLine',
