@@ -96,6 +96,31 @@
                         </div>
 
                     </Tab>
+
+
+                    <Tab name="Planejamento" tab="tab4">
+                        <div v-if="field.showSelects" class="">
+
+                            <div class="w-1/6 px-1">
+                                <strong class="block">Leis Orçamentárias</strong>
+                                <v-select
+                                    v-model="leiOrcamentariaSelecionada"
+                                    :filterable="false"
+                                    inputId="id"
+                                    label="text"
+                                    :options="listaLeisOrcamentarias"
+                                ></v-select>
+                                <button
+                                    @click="addLeiOrcamentaria()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Variável
+                                </button>
+                            </div>
+                        </div>
+                    </Tab>
+
                     <Tab name="RREO" tab="tab2">
                         <div v-if="field.showSelects" class="">
                             <div class="w-full px-1 flex">
@@ -347,6 +372,28 @@ export default {
                 { text: "Controlador", value: "{Controlador}" },
                 { text: "Responsáveis Técnicos", value: "{Responsáveis Técnicos}" }
             ],
+            listaLeisOrcamentarias: [
+                { text: "NumeroPPA", value: "{NumeroPPA}" },
+                { text: "DataPublicacaoPPA", value: "{DataPublicacaoPPA}" },
+                { text: "VeiculoPublicacaoPPA", value: "{VeiculoPublicacaoPPA}" },
+                { text: "NumeroLDO", value: "{NumeroLDO}" },
+                { text: "DataPublicacaoLDO", value: "{DataPublicacaoLDO}" },
+                { text: "VeiculoPublicacaoLDO", value: "{VeiculoPublicacaoLDO}" },
+                { text: "NumeroLOA", value: "{NumeroLOA}" },
+                { text: "DataPublicacaoLOA", value: "{DataPublicacaoLOA}" },
+                { text: "VeiculoPublicacaoLOA", value: "{VeiculoPublicacaoLOA}" },
+                { text: "NumeroAtoDetalhamentoDespesa", value: "{NumeroAtoDetalhamentoDespesa}" },
+                { text: "DataPublicacaoDetalhamentoDespesa", value: "{DataPublicacaoDetalhamentoDespesa}" },
+                { text: "VeiculoPublicacaoDetalhamentoDespesa", value: "{VeiculoPublicacaoDetalhamentoDespesa}" },
+                { text: "ArtigoLoaSuplementacao", value: "{ArtigoLoaSuplementacao}" },
+                { text: "LimiteSuplementacao", value: "{LimiteSuplementacao}" },
+                { text: "LimiteOperacoesCredito", value: "{LimiteOperacoesCredito}" },
+                { text: "LimiteMinimoEducacao", value: "{LimiteMinimoEducacao}" },
+                { text: "LimiteMaximoPessoal", value: "{LimiteMaximoPessoal}" },
+                { text: "ValorReceitaPrevista", value: "{ValorReceitaPrevista}" },
+                { text: "ValorDespesaFixada", value: "{ValorDespesaFixada}" }
+ 
+            ],
             variavelContaGestaoSelecionada: null,
             variavelContaGovernoSelecionada: null,
             exercicioContaGovernoSelecionada: {
@@ -364,6 +411,7 @@ export default {
             variavelRGFContaSelecionada: null,
             variavelRGFColunaSelecionada: null,
             analiseSelecionada: null,
+            leiOrcamentariaSelecionada: null,
 
             fieldName: { type: String },
             showErrors: { type: Boolean, default: true },
@@ -755,6 +803,22 @@ export default {
 
                     const viewFragment = editor.data.processor.toView(
                         `$_al${this.analiseSelecionada.value}`
+                    );
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment, insertPosition);
+                });
+            }
+        },
+
+        addLeiOrcamentaria() {
+            const editor = this.$options[this.editorName];
+            if (editor) {
+                editor.model.change((writer) => {
+                    const insertPosition =
+                        editor.model.document.selection.getFirstPosition();
+
+                    const viewFragment = editor.data.processor.toView(
+                        `$_lo${this.leiOrcamentariaSelecionada.value}`
                     );
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
