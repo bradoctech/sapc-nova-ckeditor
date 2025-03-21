@@ -15,12 +15,12 @@ Route::as('nova-ckeditor.')->middleware('nova')->group(function () {
     Route::get('variaveisContaGoverno/{term}', [ApiController::class, 'searchVariaveisContaGoverno'])->name('variaveis-conta-governo.search');
 
     Route::prefix('certidoes')->group(function () {
-        Route::get('/rreo-anexos/{term}', [ApiController::class, 'listRREOAnexos'])->name('siconfi_rreo.anexo');
-        Route::get('/rreo-contas/anexo/{anexo}/{term}', [ApiController::class, 'listRREOContasByAnexo'])->name('siconfi_rreo.anexo_conta');
-        Route::get('/rreo-colunas/anexo/{anexo}/conta/{conta}/{term}', [ApiController::class, 'listRREOColunasByAnexoAndConta'])->name('siconfi_rreo.anexo_conta_coluna');
-        Route::get('/rgf-anexos/{term}', [ApiController::class, 'listRGFAnexos'])->name('siconfi_rgf.anexo');
-        Route::get('/rgf-contas/anexo/{anexo}/{term}', [ApiController::class, 'listRGFContasByAnexo'])->name('siconfi_rgf.anexo_conta');
-        Route::get('/rgf-colunas/anexo/{anexo}/conta/{conta}/{term}', [ApiController::class, 'listRGFColunasByAnexoAndConta'])->name('siconfi_rgf.anexo_conta_coluna');    
+        Route::get('/rreo-anexos/{periodo}/{term?}', [ApiController::class, 'listRREOAnexos'])->name('siconfi_rreo.anexo');
+        Route::get('/rreo-contas/anexo/{periodo}/{anexo}/{term?}', [ApiController::class, 'listRREOContasByAnexo'])->name('siconfi_rreo.anexo_conta');
+        Route::get('/rreo-colunas/anexo/{periodo}/{anexo}/conta/{conta}/{term?}', [ApiController::class, 'listRREOColunasByAnexoAndConta'])->name('siconfi_rreo.anexo_conta_coluna');
+        Route::get('/rgf-anexos/{poder}/{periodo}/{term?}', [ApiController::class, 'listRGFAnexos'])->name('siconfi_rgf.anexo');
+        Route::get('/rgf-contas/anexo/{poder}/{periodo}/{anexo}/{term?}', [ApiController::class, 'listRGFContasByAnexo'])->name('siconfi_rgf.anexo_conta');
+        Route::get('/rgf-colunas/anexo/{poder}/{periodo}/{anexo}/conta/{conta}/{term?}', [ApiController::class, 'listRGFColunasByAnexoAndConta'])->name('siconfi_rgf.anexo_conta_coluna');    
     });
 
 });

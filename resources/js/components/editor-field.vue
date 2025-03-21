@@ -19,7 +19,6 @@
                                 ></v-select>
                             </div>
                 
-                   
                             <div class="w-1/6 px-1">
                                 <strong class="block">Gerais</strong>
                                 <v-select
@@ -135,7 +134,6 @@
                                     ></v-select>
                                 </div>
 
-                               
                                 <div class="w-1/3 px-1">
                                     <strong class="block">Anexo</strong>
                                     <v-select
@@ -145,6 +143,7 @@
                                         label="anexo"
                                         :options="listaRREOAnexo"
                                         @search="fetchRREOAnexo"
+                                        @update:modelValue="fetchRREOContaVazio"
                                     ></v-select>
                                 </div>
                                 <div class="w-1/3 px-1">
@@ -157,6 +156,7 @@
                                         :disabled="!variavelRREOAnexoSelecionada"
                                         :options="listaRREOConta"
                                         @search="fetchRREOConta"
+                                        @update:modelValue="fetchRREOColunaVazio"
                                     ></v-select>
                                 </div>
                                 <div class="w-1/3 px-1">
@@ -218,6 +218,7 @@
                                         label="anexo"
                                         :options="listaRGFAnexo"
                                         @search="fetchRGFAnexo"
+                                        @update:modelValue="fetchRGFContaVazio()"
                                     ></v-select>
                                 </div>
                                 <div class="w-1/3 px-1">
@@ -230,6 +231,7 @@
                                         :disabled="!variavelRGFAnexoSelecionada"
                                         :options="listaRGFConta"
                                         @search="fetchRGFConta"
+                                        @update:modelValue="fetchRGFColunaVazio()"
                                     ></v-select>
                                 </div>
 
@@ -876,7 +878,7 @@ export default {
                 this.variavelRREOAnexoSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rreo-anexos/${encodeURIComponent(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-anexos/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}/${encodeURIComponent(
                             search
                         )}`
                     )
@@ -895,7 +897,7 @@ export default {
                 this.variavelRGFAnexoSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rgf-anexos/${encodeURIComponent(
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-anexos/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}/${encodeURIComponent(
                             search
                         )}`
                     )
@@ -911,11 +913,12 @@ export default {
         async fetchRREOConta(search, loading) {
             loading(true);
 
-            if (search != "") {
+            console.log(encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo));
+            //if (search != "") {
                 this.variavelRREOContaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rreo-contas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/${encodeURIComponent(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-contas/anexo/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/${encodeURIComponent(
                             search
                         )}`
                     )
@@ -924,19 +927,37 @@ export default {
                         this.listaRREOConta= res.data;
                     })
                     .catch();
-            }
+            //}
 
             loading(false);
+        },
+
+        async fetchRREOContaVazio() {
+            //if (search != "") {
+
+            console.log("conta vazia");
+                this.variavelRREOContaSelecionada = null;
+                await Nova.request()
+                    .get(
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-contas/anexo/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}`
+                    )
+                    .then((res) => {
+                        
+                        this.listaRREOConta= res.data;
+                    })
+                    .catch();
+            //}
+
         },
 
         async fetchRGFConta(search, loading) {
             loading(true);
 
-            if (search != "") {
+            //if (search != "") {
                 this.variavelRGFContaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rgf-contas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/${encodeURIComponent(
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-contas/anexo/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/${encodeURIComponent(
                             search
                         )}`
                     )
@@ -944,9 +965,21 @@ export default {
                         this.listaRGFConta= res.data;
                     })
                     .catch();
-            }
+            //}
 
             loading(false);
+        },
+
+        async fetchRGFContaVazio() {
+            this.variavelRGFContaSelecionada = null;
+            await Nova.request()
+                .get(
+                    `/nova-vendor/nova-ckeditor/certidoes/rgf-contas/anexo/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}`
+                )
+                .then((res) => {
+                    this.listaRGFConta= res.data;
+                })
+                .catch();
         },
 
         async fetchRREOColuna(search, loading) {
@@ -956,7 +989,7 @@ export default {
                 this.variavelRREOColunaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
+                        `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
                     )
                     .then((res) => {
                         this.listaRREOColuna= res.data;
@@ -967,6 +1000,19 @@ export default {
             loading(false);
         },
 
+        async fetchRREOColunaVazio() {
+            console.log("coluna vazia");
+            this.variavelRREOColunaSelecionada = null;
+            await Nova.request()
+                .get(
+                    `/nova-vendor/nova-ckeditor/certidoes/rreo-colunas/anexo/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRREOAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRREOContaSelecionada.cod_conta)}`
+                )
+                .then((res) => {
+                    this.listaRREOColuna= res.data;
+                })
+                .catch();
+        },
+
         async fetchRGFColuna(search, loading) {
             loading(true);
 
@@ -974,7 +1020,7 @@ export default {
                 this.variavelRGFColunaSelecionada = null;
                 await Nova.request()
                     .get(
-                        `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
+                        `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.cod_conta)}/${encodeURIComponent(search)}`
                     )
                     .then((res) => {
                         this.listaRGFColuna= res.data;
@@ -983,6 +1029,18 @@ export default {
             }
 
             loading(false);
+        },
+
+        async fetchRGFColunaVazio() {
+            this.variavelRGFColunaSelecionada = null;
+            await Nova.request()
+                .get(
+                    `/nova-vendor/nova-ckeditor/certidoes/rgf-colunas/anexo/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}/${encodeURIComponent(this.variavelRGFAnexoSelecionada.anexo)}/conta/${encodeURIComponent(this.variavelRGFContaSelecionada.cod_conta)}`
+                )
+                .then((res) => {
+                    this.listaRGFColuna= res.data;
+                })
+                .catch();
         },
 
         async fetchFormulas(search, loading) {

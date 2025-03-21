@@ -30,21 +30,28 @@ class ApiController extends Controller
         return response()->json($listaVariavel);
     }
 
-    public function listRREOAnexos($term)
+    public function listRREOAnexos($periodo, $term)
     {
-        $anexos = SiconfiRREO::select('anexo')->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
+        $anexos = SiconfiRREO::select('anexo')->where('periodo', $periodo)->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
         return response()->json($anexos);
     }
     
-    public function listRREOContasByAnexo($anexo, $term)
+    public function listRREOContasByAnexo($periodo, $anexo, $term = null)
     {
-        $contas = SiconfiRREO::select('cod_conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        $contas = SiconfiRREO::select('cod_conta')->where('periodo', $periodo)->where('anexo', $anexo);
+        if ($term) {
+            $contas->where('cod_conta', 'ILIKE', "%{$term}%");
+        }
+
+        $contas = $contas->distinct()->get();
+        
         return response()->json($contas);
     }
 
-    public function listRREOColunasByAnexoAndConta($anexo, $conta, $term)
+    public function listRREOColunasByAnexoAndConta($periodo, $anexo, $conta, $term)
     {
         $colunas = SiconfiRREO::select('coluna')
+            ->where('periodo', $periodo)
             ->where('anexo', $anexo)
             ->where('cod_conta', $conta)
             ->where('coluna', 'ILIKE', "%{$term}%")
@@ -54,21 +61,23 @@ class ApiController extends Controller
         return response()->json($colunas);
     }
 
-    public function listRGFAnexos($term)
+    public function listRGFAnexos($poder, $periodo, $term)
     {
-        $anexos = SiconfiRGF::select('anexo')->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
+        $anexos = SiconfiRGF::select('anexo')->where('co_poder', $poder)->where('periodo', $periodo)->where('anexo', 'ILIKE', "%{$term}%")->distinct()->get();
         return response()->json($anexos);
     }
     
-    public function listRGFContasByAnexo($anexo, $term)
+    public function listRGFContasByAnexo($poder, $periodo, $anexo, $term)
     {
-        $contas = SiconfiRGF::select('cod_conta')->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
+        $contas = SiconfiRGF::select('cod_conta')->where('co_poder', $poder)->where('periodo', $periodo)->where('anexo', $anexo)->where('cod_conta', 'ILIKE', "%{$term}%")->distinct()->get();
         return response()->json($contas);
     }
 
-    public function listRGFColunasByAnexoAndConta($anexo, $conta, $term)
+    public function listRGFColunasByAnexoAndConta($poder, $periodo, $anexo, $conta, $term)
     {
         $colunas = SiconfiRGF::select('coluna')
+            ->where('co_poder', $poder)
+            ->where('periodo', $periodo)
             ->where('anexo', $anexo)
             ->where('cod_conta', $conta)
             ->where('coluna', 'ILIKE', "%{$term}%")
