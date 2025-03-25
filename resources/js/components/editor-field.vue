@@ -259,6 +259,31 @@
                             </div> 
                         </div>
                     </Tab>
+                    <Tab name="Listas" tab="tab3">
+                        <div v-if="field.showSelects" class="">
+                            <div class="w-full px-1 flex">
+                                <div class="w-full  px-1">
+                                    <strong class="block">Listas</strong>
+                                    <v-select
+                                        v-model="variavelListaSelecionada"
+                                        :filterable="false"
+                                        inputId="variavel"
+                                        label="variavel"
+                                        :options="listLista"
+                                    ></v-select>
+                                </div>
+                            </div>
+                            <div class="w-full px-1">
+                                <button
+                                    @click="addLista()"
+                                    class="mt-2 w-full shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900 cursor-pointer rounded text-sm font-bold focus:outline-none focus:ring ring-primary-200 dark:ring-gray-600 inline-flex items-center justify-center h-9 px-3 shadow relative bg-primary-500 hover:bg-primary-400 text-white dark:text-gray-900"
+                                    type="button"
+                                >
+                                    Adicionar Lista
+                                </button>
+                            </div>
+                        </div>
+                    </Tab>
                 </Tabs>
                 
                 
@@ -356,6 +381,7 @@ export default {
             listaRGFAnexo: [],
             listaRGFConta: [],
             listaRGFColuna: [],
+            listLista: [],
             listaAnalises: [
                 { text: "Modelo Análise", value: "{Modelo Análise}" },
                 { text: "Município", value: "{Município}" },
@@ -415,6 +441,7 @@ export default {
             variavelRGFColunaSelecionada: null,
             analiseSelecionada: null,
             leiOrcamentariaSelecionada: null,
+            variavelListaSelecionada: null,
 
             fieldName: { type: String },
             showErrors: { type: Boolean, default: true },
@@ -765,6 +792,22 @@ export default {
             }
         },
 
+        addLista() {
+            const editor = this.$options[this.editorName];
+            if (editor) {
+                editor.model.change((writer) => {
+                    const insertPosition =
+                        editor.model.document.selection.getFirstPosition();
+                         console.log(this.variavelListaSelecionada.variavel);
+                    const viewFragment = editor.data.processor.toView(
+                        `$_lista{`+`${this.variavelListaSelecionada.variavel}}`
+                    );
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment, insertPosition);
+                });
+            }
+        },
+
         addRREO() {
             const editor = this.$options[this.editorName];
             if (editor) {
@@ -871,6 +914,17 @@ export default {
             }
 
             loading(false);
+        },
+
+        fetchListas() {
+            Nova.request()
+                .get('/nova-vendor/nova-ckeditor/listas')
+                .then((res) => {
+                    this.listLista = res.data;
+                })
+                .catch((error) => {
+                    console.error('Erro ao carregar as listas:', error);
+                });
         },
 
         async fetchRREOAnexo(search, loading) {
@@ -1070,6 +1124,7 @@ export default {
     mounted() {
         if (this.currentlyIsVisible) {
             this.createCkEditor();
+            this.fetchListas();
         }
 
         this.mounted = true;
@@ -1102,6 +1157,7 @@ export default {
                 this.fixed = false;
             }
         });
+        
     },
     beforeUnmount() {
         this.destroyCkEditor();

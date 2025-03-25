@@ -3,6 +3,7 @@
 namespace Bradoctech\SapcNovaCkEditor\Http\Controllers\Api;
 
 use App\Models\Sapc\Formula;
+use App\Models\Sapc\ModeloLista;
 use App\Models\Sapc\VariavelContaGestao;
 use App\Models\Sapc\VariavelContaGoverno;
 use App\Models\SiconfiRGF;
@@ -27,6 +28,12 @@ class ApiController extends Controller
     public function searchVariaveisContaGoverno($term)
     {
         $listaVariavel = VariavelContaGoverno::where('nome', 'LIKE', "%{$term}%")->get();
+        return response()->json($listaVariavel);
+    }
+
+    public function searchListas()
+    {
+        $listaVariavel = ModeloLista::select('variavel')->get();
         return response()->json($listaVariavel);
     }
 

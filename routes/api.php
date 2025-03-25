@@ -13,6 +13,7 @@ Route::as('nova-ckeditor.')->middleware('nova')->group(function () {
     Route::get('variaveis/{term}', [ApiController::class, 'searchVariaveis'])->name('variaveis.search');
     Route::get('formulas/{term}', [ApiController::class, 'searchFormulas'])->name('formulas.search');
     Route::get('variaveisContaGoverno/{term}', [ApiController::class, 'searchVariaveisContaGoverno'])->name('variaveis-conta-governo.search');
+    Route::get('listas', [ApiController::class, 'searchListas'])->name('search.listas');
 
     Route::prefix('certidoes')->group(function () {
         Route::get('/rreo-anexos/{periodo}/{term?}', [ApiController::class, 'listRREOAnexos'])->name('siconfi_rreo.anexo');
