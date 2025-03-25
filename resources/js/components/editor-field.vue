@@ -372,7 +372,8 @@ export default {
                 { text: "Gestor", value: "{Gestor}" },
                 { text: "Protocolo eTCE", value: "{Protocolo eTCE}" },
                 { text: "Controlador", value: "{Controlador}" },
-                { text: "Responsáveis Técnicos", value: "{Responsáveis Técnicos}" }
+                { text: "Responsáveis Técnicos", value: "{Responsáveis Técnicos}" },
+                { text: "População", value: "{População}" }
             ],
             listaLeisOrcamentarias: [
                 { text: "NumeroPPA", value: "{NumeroPPA}" },
