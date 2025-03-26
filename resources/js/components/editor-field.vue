@@ -361,6 +361,7 @@ import debounce from "lodash/debounce";
 import RegexParser from "regex-parser";
 import vSelect from "vue-select";
 import {Tabs, Tab} from 'vue3-tabs-component';
+import '@vueform/toggle/themes/default.css'
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
