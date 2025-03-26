@@ -173,6 +173,11 @@
                                         @search="fetchRREOColuna"
                                     ></v-select>
                                 </div>
+
+                                <div class="w-1/3 px-1 text-center">
+                                    <strong class="block">Valor por extenso</strong>
+                                    <Toggle v-model="isValorExtensoRREO" />
+                                </div>
                             </div> 
 
                             <div class="w-full px-1">
@@ -252,7 +257,13 @@
                                         @search="fetchRGFColuna"
                                     ></v-select>
                                 </div>
-                            </div>    
+
+                                <div class="w-1/3 px-1 text-center">
+                                    <strong class="block">Valor por extenso</strong>
+                                    <Toggle v-model="isValorExtensoRGF" />
+                                </div>
+                            </div>
+
                             <div class="w-full px-1">
                                 <button
                                     @click="addRGF()"
@@ -357,6 +368,8 @@ export default {
     components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab },
     data() {
         return {
+            isValorExtensoRGF: false,
+            isValorExtensoRREO: false,
             mounted: false,
             fixed: false,
             listaVariaveisContaGestao: [],
@@ -820,9 +833,14 @@ export default {
                     const insertPosition =
                         editor.model.document.selection.getFirstPosition();
 
-                    const viewFragment = editor.data.processor.toView(
-                        `$_rreo{`+`${this.variavelRREOPeriodoSelecionada.value}_`+`${this.variavelRREOAnexoSelecionada.anexo}_`+`${this.variavelRREOContaSelecionada.cod_conta}_`+`${this.variavelRREOColunaSelecionada.coluna}}`
-                    );
+                    const prefixo = this.isValorExtensoRREO ? '$_rreo-ext' : '$_rreo';
+
+                    const conteudo = `${this.variavelRREOPeriodoSelecionada.value}_` +
+                                    `${this.variavelRREOAnexoSelecionada.anexo}_` +
+                                    `${this.variavelRREOContaSelecionada.cod_conta}_` +
+                                    `${this.variavelRREOColunaSelecionada.coluna}`;
+
+                    const viewFragment = editor.data.processor.toView(`${prefixo}{${conteudo}}`);
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
                 });
@@ -833,12 +851,17 @@ export default {
             const editor = this.$options[this.editorName];
             if (editor) {
                 editor.model.change((writer) => {
-                    const insertPosition =
-                        editor.model.document.selection.getFirstPosition();
-                         console.log(this.variavelRGFPoderSelecionada);
-                    const viewFragment = editor.data.processor.toView(
-                        `$_rgf{`+`${this.variavelRGFPoderSelecionada.value}_`+`${this.variavelRGFPeriodoSelecionada.value}_`+`${this.variavelRGFAnexoSelecionada.anexo}_`+`${this.variavelRGFContaSelecionada.cod_conta}_`+`${this.variavelRGFColunaSelecionada.coluna}}`
-                    );
+                    const insertPosition = editor.model.document.selection.getFirstPosition();
+                    
+                    const prefixo = this.isValorExtensoRGF ? '$_rgf-ext' : '$_rgf';
+
+                    const conteudo = `${this.variavelRGFPoderSelecionada.value}_` +
+                                    `${this.variavelRGFPeriodoSelecionada.value}_` +
+                                    `${this.variavelRGFAnexoSelecionada.anexo}_` +
+                                    `${this.variavelRGFContaSelecionada.cod_conta}_` +
+                                    `${this.variavelRGFColunaSelecionada.coluna}`;
+
+                    const viewFragment = editor.data.processor.toView(`${prefixo}{${conteudo}}`);
                     const modelFragment = editor.data.toModel(viewFragment);
                     editor.model.insertContent(modelFragment, insertPosition);
                 });
