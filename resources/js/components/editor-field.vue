@@ -361,12 +361,13 @@ import debounce from "lodash/debounce";
 import RegexParser from "regex-parser";
 import vSelect from "vue-select";
 import {Tabs, Tab} from 'vue3-tabs-component';
+import Toggle from '@vueform/toggle'
 import '@vueform/toggle/themes/default.css'
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
     props: ["resourceName", "resourceId", "field", "toolbar", "formUniqueId"],
-    components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab },
+    components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab, Toggle },
     data() {
         return {
             isValorExtensoRGF: false,
