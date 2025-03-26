@@ -131,6 +131,7 @@
                                         inputId="id"
                                         label="text"
                                         :options="listaRREOPeriodo"
+                                        @update:modelValue="fetchRREOAnexoVazio"
                                     ></v-select>
                                 </div>
 
@@ -144,6 +145,7 @@
                                         :options="listaRREOAnexo"
                                         @search="fetchRREOAnexo"
                                         @update:modelValue="fetchRREOContaVazio"
+                                        :disabled="!variavelRREOPeriodoSelecionada" 
                                     ></v-select>
                                 </div>
                                 <div class="w-1/3 px-1">
@@ -206,6 +208,8 @@
                                         inputId="id"
                                         label="text"
                                         :options="listaRGFPeriodo"
+                                        @update:modelValue="fetchRGFAnexoVazio"
+                                        :disabled="!variavelRGFPoderSelecionada"
                                     ></v-select>
                                 </div>
 
@@ -218,7 +222,8 @@
                                         label="anexo"
                                         :options="listaRGFAnexo"
                                         @search="fetchRGFAnexo"
-                                        @update:modelValue="fetchRGFContaVazio()"
+                                        @update:modelValue="fetchRGFContaVazio"
+                                        :disabled="!variavelRGFPeriodoSelecionada"
                                     ></v-select>
                                 </div>
                                 <div class="w-1/3 px-1">
@@ -231,7 +236,7 @@
                                         :disabled="!variavelRGFAnexoSelecionada"
                                         :options="listaRGFConta"
                                         @search="fetchRGFConta"
-                                        @update:modelValue="fetchRGFColunaVazio()"
+                                        @update:modelValue="fetchRGFColunaVazio"
                                     ></v-select>
                                 </div>
 
@@ -946,6 +951,21 @@ export default {
             loading(false);
         },
 
+        async fetchRREOAnexoVazio() {
+
+            this.variavelRREOAnexoSelecionada = null;
+            this.listaRREOAnexo = []; 
+            await Nova.request()
+                .get(
+                    `/nova-vendor/nova-ckeditor/certidoes/rreo-anexos/${encodeURIComponent(this.variavelRREOPeriodoSelecionada.value)}`
+                )
+                .then((res) => {
+                    
+                    this.listaRREOAnexo= res.data;
+                })
+                .catch();     
+        },
+
         async fetchRGFAnexo(search, loading) {
             loading(true);
             if (search != "") {
@@ -963,6 +983,21 @@ export default {
             }
 
             loading(false);
+        },
+
+        async fetchRGFAnexoVazio() {
+
+            this.variavelRGFAnexoSelecionada = null;
+            this.listaRGFAnexo = []; 
+
+            await Nova.request()
+            .get(
+                `/nova-vendor/nova-ckeditor/certidoes/rgf-anexos/${encodeURIComponent(this.variavelRGFPoderSelecionada.value)}/${encodeURIComponent(this.variavelRGFPeriodoSelecionada.value)}`
+            ).then((res) => {                    
+                this.listaRGFAnexo= res.data;
+            })
+            .catch();     
+
         },
 
         async fetchRREOConta(search, loading) {
