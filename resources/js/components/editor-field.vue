@@ -176,7 +176,7 @@
 
                                 <div class="w-1/3 px-1 text-center">
                                     <strong class="block">Valor por extenso</strong>
-                                    <Toggle v-model="isValorExtensoRREO" />
+                                    <input type="checkbox" v-model="isValorExtensoRREO" />
                                 </div>
                             </div> 
 
@@ -260,7 +260,7 @@
 
                                 <div class="w-1/3 px-1 text-center">
                                     <strong class="block">Valor por extenso</strong>
-                                    <Toggle v-model="isValorExtensoRGF" />
+                                    <input type="checkbox" v-model="isValorExtensoRGF" />
                                 </div>
                             </div>
 
@@ -361,13 +361,11 @@ import debounce from "lodash/debounce";
 import RegexParser from "regex-parser";
 import vSelect from "vue-select";
 import {Tabs, Tab} from 'vue3-tabs-component';
-import Toggle from '@vueform/toggle'
-import '@vueform/toggle/themes/default.css'
 
 export default {
     mixins: [DependentFormField, HandlesValidationErrors, HasUUID],
     props: ["resourceName", "resourceId", "field", "toolbar", "formUniqueId"],
-    components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab, Toggle },
+    components: { SnippetBrowser, MediaBrowser, vSelect, Tabs, Tab },
     data() {
         return {
             isValorExtensoRGF: false,
