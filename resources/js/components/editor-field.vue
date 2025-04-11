@@ -9,17 +9,6 @@
                     <Tab name="SAPC" tab="tab1">
                         <div v-if="field.showSelects" class="flex mb-3 bg-white">
                             <div class="w-1/6 px-1">
-                                <strong class="block">Exercício</strong>
-                                <v-select
-                                    v-model="exercicioContaGovernoSelecionada"
-                                    :filterable="false"
-                                    inputId="value"
-                                    label="label"
-                                    :options="listaExercicio"
-                                ></v-select>
-                            </div>
-                
-                            <div class="w-1/6 px-1">
                                 <strong class="block">Gerais</strong>
                                 <v-select
                                     v-model="analiseSelecionada"
@@ -35,6 +24,17 @@
                                 >
                                     Adicionar Análise
                                 </button>
+                            </div>
+
+                            <div class="w-1/6 px-1">
+                                <strong class="block">Exercício</strong>
+                                <v-select
+                                    v-model="exercicioContaGovernoSelecionada"
+                                    :filterable="false"
+                                    inputId="value"
+                                    label="label"
+                                    :options="listaExercicio"
+                                ></v-select>
                             </div>
 
                             <div class="w-1/6 px-1 bg-white">
