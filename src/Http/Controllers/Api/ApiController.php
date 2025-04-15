@@ -9,7 +9,7 @@ use App\Models\Sapc\VariavelContaGoverno;
 use App\Models\SiconfiRGF;
 use App\Models\SiconfiRREO;
 use Illuminate\Routing\Controller;
-
+use App\Models\Sapc\ModeloElemento;
 
 class ApiController extends Controller
 {
@@ -121,5 +121,21 @@ class ApiController extends Controller
         $colunas = $colunas->distinct()->orderBy('coluna')->get();
 
         return response()->json($colunas);
+    }
+
+    public function listElementos(Request $request)
+    {
+        $elementos = ModeloElemento::select('variavel')
+            ->when(!$request->isNotFilled('q'), function($q) use ($request){
+                $q->where('variavel', 'ILIKE', "%{$request->input('q')}%");
+            })
+            ->distinct()
+            ->get()
+            ->map(fn($item) => [
+                'text' => $item->variavel,
+                'value' => $item->variavel,
+            ]);
+
+        return response()->json($elementos);
     }
 }

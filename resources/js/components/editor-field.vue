@@ -300,6 +300,33 @@
                             </div>
                         </div>
                     </Tab>
+
+                    <Tab name="Elemento" tab="tab1">
+                        <div v-if="field.showSelects">
+                            <div class="w-full px-1 flex">
+                                <div class="w-full  px-1">
+                                    <strong class="block">Elementos</strong>
+                                    <v-select
+                                        v-model="variavelElementoSelecionada"
+                                        :options="listaVariaveisElemento"
+                                        @search="fetchVariaveisElemento"
+                                        :filterable="false"
+                                        inputId="id"
+                                        label="text"
+                                    ></v-select>
+                                </div>
+                            </div>
+                            <div class="w-full px-1">
+                                <button
+                                    @click="addVariavelElemento"
+                                    class="mt-2 w-full shadow bg-primary-500 hover:bg-primary-400 text-white rounded text-sm font-bold h-9 px-3"
+                                    type="button"
+                                >
+                                    Adicionar Elemento
+                                </button>
+                            </div>
+                        </div>
+                    </Tab>
                 </Tabs>
                 
                 
@@ -466,6 +493,9 @@ export default {
             showErrors: { type: Boolean, default: true },
             fullWidthContent: { type: Boolean, default: false },
             labelFor: { default: null },
+
+            listaVariaveisElemento: [],
+            variavelElementoSelecionada: null,
         };
     },
     computed: {
@@ -1173,6 +1203,19 @@ export default {
             }
 
             loading(false);
+        },
+        fetchVariaveisElemento(search = "") {
+            const query = search?.trim();
+            const uri = `/nova-vendor/nova-ckeditor/elementos?q=${query? encodeURIComponent(query):''}`;
+
+            Nova.request()
+                .get(uri)
+                .then((res) => {
+                    this.listaVariaveisElemento = res.data;
+                })
+                .catch((error) => {
+                    console.error('Erro ao buscar as variáveis de elemento:', error?.response?.data || error.message || error);
+                });
         },
     },
     created() {
