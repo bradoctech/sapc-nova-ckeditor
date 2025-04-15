@@ -10,6 +10,7 @@ use App\Models\SiconfiRGF;
 use App\Models\SiconfiRREO;
 use Illuminate\Routing\Controller;
 use App\Models\Sapc\ModeloElemento;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
