@@ -931,6 +931,19 @@ export default {
             }
         },
 
+        addVariavelElemento() {
+            const editor = this.$options[this.editorName];
+            if (editor) {
+                editor.model.change((writer) => {
+                    const insertPosition = editor.model.document.selection.getFirstPosition();
+                    const viewFragment = editor.data.processor.toView(
+                        "==#(" + this.variavelElementoSelecionada.value + ")#"
+                    );
+                    const modelFragment = editor.data.toModel(viewFragment);
+                    editor.model.insertContent(modelFragment, insertPosition);
+                });
+            }
+        },
         /**
          * Triggered when the search text changes.
          *
